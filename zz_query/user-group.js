@@ -122,6 +122,8 @@ $(document).ready(function () {
     $("#MMList").change(()=>{
         getBindDetailTable();
         getUnbindDetailTable();
+
+        $(".group-name").text($("#MMList option:selected").text())
     }).trigger('change')
 
     $("#addPeopleBtn").click(()=>addPeople())
@@ -532,7 +534,7 @@ function getBindDetailTable(){
     FUN_SID_UNBIND_LIST = [];
     FUN_SID_DEL_LIST = [];
 
-    masterSID = $("#MMList").find(":selected").val();
+    masterSID = $("#MMList").val();
 
     if(!masterSID) return //若沒有選擇主體，則中斷執行
     if(DetailTable) DetailTable.destroy();
@@ -555,7 +557,7 @@ function getUnbindDetailTable(){
     FUN_SID_UNBIND_LIST = [];
     FUN_SID_DEL_LIST = [];
 
-    masterSID = $("#MMList").find(":selected").val();
+    masterSID = $("#MMList").val();
 
     if(!masterSID) return //若沒有選擇主體，則中斷執行
     if(addPeopleList) addPeopleList.destroy();
