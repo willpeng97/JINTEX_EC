@@ -249,7 +249,7 @@ function GetLngDic(lng) {
     $.ajax({
         type: 'POST',
         async: false,
-        url: "http://" + ip + "/" + WebSiteName + '/Handler/LangHandle.ashx',
+        url: window.location.protocol+'//'+default_ip + ip + "/" + WebSiteName + '/Handler/LangHandle.ashx',
         data: {
              // ActionMode: 'GetDic4APP', //雙語系
             // ActionMode: 'GetDic4APPOneLan',//單語系
@@ -504,9 +504,9 @@ function GetConfig() {
         WebSiteName = default_WebSiteName;
         localStorageSetItem("WebSiteName", default_WebSiteName);
     }
-    loginurl = "http://" + ip + "/" + WebSiteName + '/Handler/UserHandler.ashx';
-    wipurl = "http://" + ip + "/" + WebSiteName + '/Handler/WIPHandler.ashx';
-    eqpwipurl = "http://" + ip + "/" + WebSiteName + '/Handler/EQPHandler.ashx';
+    loginurl = window.location.protocol+'//'+default_ip + "/" + WebSiteName + '/Handler/UserHandler.ashx';
+    wipurl = window.location.protocol+'//'+default_ip + "/" + WebSiteName + '/Handler/WIPHandler.ashx';
+    eqpwipurl = window.location.protocol+'//'+default_ip + "/" + WebSiteName + '/Handler/EQPHandler.ashx';
 }
 
 function ShowMenu() {
@@ -522,7 +522,7 @@ function ShowMenu() {
 function GetLangType() {
     $.ajax({
         type: 'POST',
-        url: "http://" + ip + '/' + WebSiteName + '/Handler/OptionsHandler.ashx?type=&SQL=select LANG_CODE,LANG_NAME from SEC_LANG_TYPE order by seq ',
+        url: window.location.protocol+'//'+default_ip + '/' + WebSiteName + '/Handler/OptionsHandler.ashx?type=&SQL=select LANG_CODE,LANG_NAME from SEC_LANG_TYPE order by seq ',
         async: false,
         success: function (msg) {
             var resultJson = JSON.parse(msg);

@@ -111,7 +111,7 @@ function GetMenuData(account,TokenKey){
       method: 'GET',
       async: false,
       contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-      url:  'http://'+default_ip+'/'+default_Api_Name+'/api/GetMenu',
+      url:  window.location.protocol+'//'+default_ip+'/'+default_Api_Name+'/api/GetMenu',
       headers: {
         UID: account,
         TokenKey: TokenKey
