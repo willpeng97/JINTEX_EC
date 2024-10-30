@@ -88,7 +88,7 @@
                     </select>
                   </div>
                   <button class="btn c-btn text-secondary fw-bold" data-bs-toggle="modal" data-bs-target="#settingsModal"><i class="fa-solid fa-wrench"></i> 群組設定</button>
-                  <button class="btn c-btn text-secondary fw-bold">+新建群組</button>
+                  <button class="btn c-btn text-secondary fw-bold" data-bs-toggle="modal" data-bs-target="#createGroupModal">+新建群組</button>
                 </div>
 
                 <!-- block2 -->
@@ -120,7 +120,7 @@
       </div>
     </div>
 
-    <!-- 彈出Modal -->
+    <!-- 綁定用戶Modal -->
     <div class="modal fade" id="addPeopleModal" tabindex="-1" aria-labelledby="addPeopleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
@@ -147,8 +147,8 @@
       </div>
     </div>
 
-     <!-- 群組設定彈出框 -->
-     <div class="modal fade" id="settingsModal" tabindex="-1" aria-labelledby="settingsModalLabel" aria-hidden="true">
+    <!-- 群組設定Modal -->
+    <div class="modal fade" id="settingsModal" tabindex="-1" aria-labelledby="settingsModalLabel" aria-hidden="true">
       <div class="modal-dialog">
           <div class="modal-content">
               <div class="modal-header">
@@ -168,6 +168,25 @@
               <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
                   <button type="button" class="btn btn-primary" id="saveSettings">儲存設定</button>
+              </div>
+          </div>
+      </div>
+    </div>
+
+    <!-- 新建群組Modal -->
+    <div class="modal fade" id="createGroupModal" tabindex="-1" aria-labelledby="createGroupModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title fw-bold" id="createGroupModalLabel">新建群組</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                  <input type="text" class="form-control" placeholder="輸入群組名稱..." id="createGroupName" autocomplete="off">
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                  <button type="button" class="btn btn-primary" id="createGroupBtn">建立</button>
               </div>
           </div>
       </div>

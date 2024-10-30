@@ -6,6 +6,8 @@ $(document).ready(function () {
 
     //保存群組設定
     $("#saveSettings").click(()=>settingSave(masterSID))
+
+    $("#createGroupBtn").click(()=>createGroup())
 })
 
 function setFunctionList(masterSID){
@@ -209,4 +211,24 @@ async function settingSave(masterSID){
             }
         })
     };
+}
+
+function createGroup(){
+    let AddVal = ` N'${$("#createGroupName").val()}', N'Y', N'福盈人員建立群組',`
+    $.ajax({
+        type: 'post',
+        url: window.location.protocol+'//' + default_ip + '/' + default_WebSiteName + '/MasterMaintain/Model/MasterMaintainHandler.ashx',
+        data: { funcName: "AddSingleRowData", TableName: "SEC_USERGROUP", AddVal: AddVal, AddTitle: "GROUP_NAME,ENABLE_FLAG,DESCRIPTION,GROUP_SID", USER: "ADMINV2",SID_VAL : "50603545907267" ,log_val: AddVal },
+        dataType: 'json',
+        async: false,
+        success: async function (result) {
+            await customAlertSuccess("新建群組成功")
+            location.reload()
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+            if (xhr.status = 500)
+                alert("資料格式錯誤!");
+            alert(thrownError);
+        }
+    });
 }
