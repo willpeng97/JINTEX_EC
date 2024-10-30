@@ -1,10 +1,14 @@
-var bindData
 $(document).ready(function () {
-    showFuncBind('342985347550285')
+    let allBindData = getAllBindData('342985347550285')
+    console.log(allBindData)
+    
+    setFunctionList(allBindData)
 })
 
-//綁定
-function showFuncBind(master_sid) {
+//取得功能清單資料
+function getAllBindData(master_sid) {
+    let bindData,unbindData
+    // 已綁定清單
     $.ajax({
         type: 'POST',
         title: 'Unassigned',
@@ -40,75 +44,14 @@ function showFuncBind(master_sid) {
         pageSize: parseInt(1000),
         pageList: [10],
         success: function (msg) {
-            var jsonObj = jQuery.parseJSON(msg);
-            bindData = jsonObj;
+            let jsonObj = jQuery.parseJSON(msg);
+            bindData = jsonObj.rows;
         }, error: function (msg) {
-            var jsonObj = msg;
+            let jsonObj = msg;
+            console.log('error:',jsonObj)
         }
     });
-
-    console.log(bindData)
-
-    // var ENABLE_FLAG_Y = '<input type="checkbox" id = "enable_flag" name = "enable_flag" value = "Y" checked="checked">';
-    // var BindData = [];
-    // for(var i=0 ;i<GridData.rows.length;i++){
-    //     ENABLE_FLAG_Y = '<input type="checkbox" id = "enable_flag'+ enable_flag_num +'" name = "enable_flag" value = "Y" checked="checked">'
-    //     CurrentRow.push(ENABLE_FLAG_Y);
-    //     for (var j = 0; j < MD_Columns_Detail_ColList.length; j++)
-    //     {
-    //         CurrentRow.push(GridData.rows[i][MD_Columns_Detail_ColList[j]]);
-    //     }
-    //     BindData.push(CurrentRow);
-    //     AllGridData.push([GridData.rows[i][MD_Maintain_Data.rows[0].RELATION_SID_FIELD],GridData.rows[i][MD_Maintain_Data.rows[0].DELAIL_SID_FIELD]]);
-    //     FUN_SID_ORIGIN_BIND_LIST.push(GridData.rows[i][MD_Maintain_Data.rows[0].DELAIL_SID_FIELD]);
-    //     FUN_SID_ALL_BIND_LIST.push(GridData.rows[i][MD_Maintain_Data.rows[0].DELAIL_SID_FIELD]);
-    //     enable_flag_num++;
-    //     CurrentRow = [];
-    // };
-    
-    // $("#trDT").append('<th>'+GetLangDataV2('Check Bind')+'</th>');//是否啟用
-    // for (var j = 0; j < MD_Columns_Detail_ColList.length; j++)
-    // {
-    //     $("#trDT").append('<th>'+ GetLangDataV2(MD_Columns_Detail_ColList[j]) +'</th>');
-    // }
-
-    // DetailTable = $('#MasterMaintainDetail').DataTable({
-    //     data: BindData,
-    //     dom: 'frtp',
-    //     // searching: false,
-    //     language: {
-    //         search: GetLangDataV2("search:"), // 將"Search"更改為"搜尋："
-    //         lengthMenu: GetLangDataV2("Show _MENU_ entries"), // 自定義顯示條目數的文本為中文
-    //         info: GetLangDataV2("Showing _START_ to _END_ of _TOTAL_ entries"),//"顯示第 _START_ 到 _END_ 條，共 _TOTAL_ 條", // 
-    //         infoEmpty: GetLangDataV2("Showing 0 to 0 of 0 entries"),//"顯示 0 到 0 條，共 0 條"
-            
-    //         paginate: {
-    //             previous: GetLangDataV2("Previous"),//"上一頁", // 將"Previous"更改為"上一頁"
-    //             next: GetLangDataV2("Next"),//"下一頁" // 將"Next"更改為"下一頁"
-    //           }
-            
-    //       }, 
-    //      fnDrawCallback: function(){
-    //         getAdd_Del_List();
-    //      },
-    //      initComplete: function() {
-    //         $("#MasterMaintainDetail_filter").hide() // 隱藏dataTable原生搜尋欄
-    //         // 關鍵字搜尋
-    //         $('#searchBtn').on('click', function() {
-    //             DetailTable.search($("#keyword").val()).draw();
-    //         });
-    //         $('#keyword').on('keydown', function(e) {
-    //             if (e.key === 'Enter') {
-    //                 DetailTable.search($(this).val()).draw();
-    //             }
-    //         });
-    //     }
-    // });
-};
-
-
-//未綁定(需與bind()一起使用)
-function unbind(master_sid) {
+    // 未綁定清單
     $.ajax({
         type: 'POST',
         title: 'Unassigned',
@@ -118,55 +61,73 @@ function unbind(master_sid) {
         pagination: true,
         data: {
             ActionMode: '',
-            MasterTable: MD_Maintain_Data.rows[0].MASTER_TABLE_NAME, //a.MASTER_TABLE_NAME
-            DetailTable: MD_Maintain_Data.rows[0].RELATION_TABLE_NAME, //a.RELATION_TABLE_NAME
-            SearchTable: MD_Maintain_Data.rows[0].DETAIL_TABLE_NAME, // a.DETAIL_TABLE_NAME
-            MasterSIDField: MD_Maintain_Data.rows[0].MASTER_SID_FIELD, //a.MASTER_SID_FIELD
-            DetailSIDField: MD_Maintain_Data.rows[0].RELATION_SID_FIELD, //a.RELATION_SID_FIELD
-            SearchSIDField: MD_Maintain_Data.rows[0].DELAIL_SID_FIELD, // a.DELAIL_SID_FIELD
-            RelationMasterSIDField: MD_Maintain_Data.rows[0].RELATION_MASTER_SID_FIELD, //a.RELATION_MASTER_SID_FIELD
-            RelationDetailSIDField: MD_Maintain_Data.rows[0].RELATION_DETAIL_SID_FIELD, //a.RELATION_DETAIL_SID_FIELD
+            MasterTable: "SEC_USERGROUP", //a.MASTER_TABLE_NAME
+            DetailTable: "SEC_USERGROUP_FUNCTION_LIST", // a.RELATION_TABLE_NAME
+            SearchTable: "V_SEC_SITEMAP_EC", // a.DETAIL_TABLE_NAME
+            MasterSIDField: "GROUP_SID", //a.MASTER_SID_FIELD
+            DetailSIDField: "GROUP_FUN_LIST_SID", //a.RELATION_SID_FIELD
+            SearchSIDField: "FUN_SID", // a.DELAIL_SID_FIELD
+            RelationMasterSIDField: "GROUP_SID", //a.RELATION_MASTER_SID_FIELD
+            RelationDetailSIDField: "FUN_SID", //a.RELATION_DETAIL_SID_FIELD
             SearchMasterSID: master_sid,
             operType: 'QuerySearch',
             UserName: 'ADMINV2',
             rows: '1000',
             page: '1',
             _search: false,
-            COLUMNS: MD_Columns_Search_Data, // d.COL_NAME
-            defaultSort: ' order by ' + MD_Maintain_Data.rows[0].DETAIL_SORT_NAME + ' ' + MD_Maintain_Data.rows[0].DETAIL_SORT_ORDER // order by " + a.DETAIL_SORT_NAME + a.DETAIL_SORT_ORDER
+            COLUMNS: "GROUP_FUN_LIST_SID,GROUP_SID,FUN_SID,CREATE_USER,CREATE_TIME,EDIT_USER,EDIT_TIME,M_FLAG,D_FLAG", // d.COL_NAME
+            defaultSort: ' order by EDIT_TIME Desc' // order by " + a.DETAIL_SORT_NAME + a.DETAIL_SORT_ORDER
         },
         singleSelect: true,
         multiSort: false,
         rownumbers: true,
-        sortName: MD_Maintain_Data.rows[0].DETAIL_SORT_NAME, //a.DETAIL_SORT_NAME
-        sortOrder: MD_Maintain_Data.rows[0].DETAIL_SORT_ORDER, //a.DETAIL_SORT_ORDER
+        sortName: "EDIT_TIME", //a.DETAIL_SORT_NAME
+        sortOrder: "Desc", //a.DETAIL_SORT_ORDER
         singleSelect: false,
         pageSize: parseInt(1000),
         pageList: [10],
         success: function (msg) {
-            var jsonObj = jQuery.parseJSON(msg);
-            GridData = jsonObj;
+            let jsonObj = jQuery.parseJSON(msg);
+            unbindData = jsonObj.rows;
         }, error: function (msg) {
-            var jsonObj = msg;
+            let jsonObj = msg;
+            console.log('error:',jsonObj)
         }
     });
 
-    var ENABLE_FLAG_N = '<input type="checkbox" id = "enable_flag" name = "enable_flag" value = "N">';
-    //var BindData = [];
-    for(var i=0 ;i < GridData.rows.length;i++){
-        ENABLE_FLAG_N = '<input type="checkbox" id = "enable_flag'+ enable_flag_num +'" name = "enable_flag" value = "N">'
-        CurrentRow.push(ENABLE_FLAG_N);
-        for (var j = 0; j < MD_Columns_Detail_ColList.length; j++)
-        {
-            CurrentRow.push(GridData.rows[i][MD_Columns_Detail_ColList[j]]);
-        }
-        //BindData.push([ENABLE_FLAG_N,GridData.rows[i].ETEXT,GridData.rows[i].NAVIGATEURL]);
-        BindData.push(CurrentRow);
-        AllGridData.push(["NoData",GridData.rows[i][MD_Maintain_Data.rows[0].DELAIL_SID_FIELD]]);
-        // FUN_SID_UNBIND_LIST.push(GridData.rows[i].FUN_SID);
-        enable_flag_num++;
-        CurrentRow = [];
-    };
-    var BindDataTable = $('#MasterMaintainDetail').DataTable()
-    BindDataTable.rows.add(BindData).draw();
+    return [...bindData,...unbindData]
 };
+
+function setFunctionList(allBindData){
+    //排序
+    allBindData.sort((a, b) => {
+        return a.EDIT_TIME.localeCompare(b.EDIT_TIME);
+    });
+
+    let functionListHtml = ''
+    allBindData.forEach((fun,index) => {
+        let FUN_SID = fun.FUN_SID
+        let GROUP_FUN_LIST_SID = fun.GROUP_FUN_LIST_SID || ""
+        let isBind = fun.GROUP_FUN_LIST_SID ? true : false;
+
+        functionListHtml += `
+            <div class="col-6 mb-2">
+                <div class="form-check">
+                    <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="fun${index}"
+                        data-fun-sid="${FUN_SID}"
+                        data-group-fun-list-sid="${GROUP_FUN_LIST_SID}"
+                        ${isBind ? 'checked' : ''}
+                    >
+                    <label class="form-check-label" for="fun${index}">
+                        ${fun.ETEXT}
+                    </label>
+                </div>
+            </div>
+        `
+    });
+
+    $("#functionList").html(functionListHtml)
+}
