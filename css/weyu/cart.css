@@ -1,0 +1,18 @@
+
+table button {
+    margin: 0 .7rem 0 0;
+    padding: 0;
+    text-align: center;
+    width: auto!important;
+    height: 2.5rem!important;
+    vertical-align: middle;
+}
+table button img {
+    font-size: 1.5rem;
+    line-height: 0!important;
+    width: auto!important;
+    height: 1rem!important;
+}
+table.dataTable tbody th, table.dataTable tbody td {
+    padding: 2px;
+}

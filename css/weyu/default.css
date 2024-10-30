@@ -1,0 +1,115 @@
+html,
+body {
+  scroll-behavior: smooth;
+}
+#brand img {
+  height: auto;
+  width: 250px;
+}
+#menuMain {
+  background-color: #05356c;
+  box-shadow: 0 0 10px rgb(0, 0, 0, .4);
+  padding: .25rem 0;
+}
+#menuMain a {
+  text-decoration: none;
+}
+.navbar-brand img {
+  border-right: 1px solid rgb(14, 107, 147);
+  padding-right: 1rem;
+  height: 1.8rem;
+  width: auto;
+}
+.offcanvas-body img {
+  height: 1.2rem;
+  width: auto;
+}
+.dropdown-menu[data-bs-popper] {
+  left: auto!important;
+  right: 0;
+}
+.dropdown-toggle::after {
+  display: none !important;
+}
+.active>.page-link, .page-link.active,
+button.btn.btn-primary {
+  background-color: #05356c;
+  border: 0;
+}
+@media all and (min-width:768px) {
+  .inline {
+    display: inline;
+  }
+  .welcome {
+    border-right: 1px solid rgb(14, 107, 147);
+    padding-right: 1rem;
+  }
+}
+@media all and (max-width:767px) {
+  .offcanvas-header,
+  .offcanvas-body {
+    background-color: #16076b;
+  }
+}
+.cover {
+  height: auto;
+  max-height: 10rem;
+}
+img.cover {
+  margin-bottom: 1rem;
+  max-width: 95%;
+}
+.toolbar button {
+  border-radius: 3px;
+  background-color: #05356c;
+  color: #fff;
+  margin-right: .75rem;
+  padding: .25rem .5rem;
+}
+.toolbar button:hover {
+  background-color: #0a4589;
+}
+.tableWrapper {
+  color: #666;
+  border-radius: 5px;
+  padding: 5px;
+}
+table.dataTable>thead>tr>th, 
+table.dataTable>thead>tr>td,
+.tableWrapper th,
+.tableWrapper td {
+    padding: 1rem 0;
+}
+table.dataTable.dtr-inline.collapsed>tbody>tr>td.dtr-control:before, table.dataTable.dtr-inline.collapsed>tbody>tr>th.dtr-control:before
+{
+  color: rgba(255, 255, 255, 50%)!important;
+}
+.btnItem {
+  background-color: #eee;
+}
+.tableWrapper a,
+.btnItem h3,
+footer {
+  color: #05356C;
+}
+
+/* 變色效果 */
+.hover-effect {
+  transition: background-color 0.3s ease, color 0.3s ease;
+
+}
+.hover-effect:hover {
+  background-color: #05356c; 
+}
+.hover-effect:hover h3 {
+  color: white; 
+}
+
+.backButton {
+  margin-right: 10px;
+  cursor: pointer;
+}
+.backButton p{
+  color:white;
+  font-weight: bold;
+}

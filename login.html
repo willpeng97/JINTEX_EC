@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>電子下單平台 - JINTEX-</title>
+    <link rel="stylesheet" href="css/comm/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/weyu/default.css" />
+    <link rel="stylesheet" href="css/weyu/login.css" />
+  </head>
+  <body>
+    <div class="container col-xl-10 col-xxl-8 px-4 py-5">
+      <div class="row align-items-center g-lg-5 py-5">
+        <div class="col-md-10 mx-auto col-lg-5">
+          <form
+            class="p-3 border border-info border-opacity-10 rounded-3 bg-info bg-opacity-10 text-dark-emphasis"
+          >
+            <div id="brand" class="form-floating text-center">
+              <img src="img/weyu/brand.png" class="m-4" alt="Brand of JINTEX" />
+            </div>
+            <div class="text-center text-light mb-3">電子下單平台</div>
+            <div
+              id="errorMSG"
+              class="text-light fw-bold text-center bg-danger bg-opacity-50 mb-3 p-2 rounded-3"
+              style="display: none"
+            >
+              Correct the "Account" or "Password", please.
+            </div>
+            <div class="form-floating mb-3">
+              <input
+                class="form-control"
+                id="id"
+                placeholder="name@example.com"
+              />
+              <label for="id">Account</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input
+                type="password"
+                class="form-control"
+                id="pw"
+                placeholder="Password"
+              />
+              <label for="pw">Password</label>
+            </div>
+            <button
+              type="button"
+              class="w-100 btn btn-lg btn-primary mb-3"
+              id="login"
+            >
+              Login
+            </button>
+            <div class="form-floating mb-3"></div>
+          </form>
+          <div class="mt-3 text-center">
+            <small class="text-info text-opacity-50"
+              >© COPYRIGHT – WEYU TECHNOLOGY CO.,LTD.</small
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="changePwdModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="changePwdModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="changePwdModalLabel">首次登入 設定帳號密碼</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="row mb-1 ps-0">
+                <label for="newAccount" class="col-3 text-end">設定帳號:</label>
+                <input type="text" id="newAccount" class="col-6" autocomplete="off">
+            </div>
+            <div class="row mb-1 ps-0">
+                <label for="newPassword" class="col-3 text-end">設定密碼:</label>
+                <input type="password" id="newPassword" class="col-6" autocomplete="off">
+            </div>
+            <div class="row ps-0">
+                <label for="newPassword_Check" class="col-3 text-end">確認密碼:</label>
+                <input type="password" id="newPassword_Check" class="col-6" autocomplete="off">
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">返回</button>
+            <button type="button" class="btn btn-primary" id="savePwdChange">保存</button>
+        </div>
+        </div>
+    </div>
+    </div>
+    <script src="js/comm/jquery-3.7.1.min.js"></script>
+    <script src="js/comm/bootstrap.bundle.min.js"></script>
+    <script src="js/weyu/weyu_config.js"></script>
+    <script src="login.js"></script>
+    <!-- <script src="js/weyu/weyu_comm_function.js"></script> -->
+    <!-- <script src="js/weyu/weyu_comm_api_function.js"></script> -->
+  </body>
+</html>

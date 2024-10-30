@@ -1,0 +1,40 @@
+td img {
+    line-height: 0!important;
+    width: auto!important;
+    height: 1.2rem!important;
+}
+
+
+td,th {
+    padding-left: 0.5rem !important;
+}
+
+
+tr input[type='checkbox'] {
+    width: 100%;
+    height: 1.25rem;
+}
+
+.tableWrapper {
+    position: relative;
+}
+
+.c-btn:hover {
+    background-color: #eeeeee;
+}
+
+#MasterMaintainDetail,
+#addPeopleList {
+    margin-bottom: 5px;
+}
+
+.hover-red:hover{
+    color:rgb(252, 59, 59) !important
+}
+
+.settings-group {
+    margin-bottom: 1.5rem;
+}
+.form-check {
+    margin-bottom: 0.5rem;
+}

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>電子下單平台 - JINTEX-</title>
+    <link rel="stylesheet" href="../css/comm/bootstrap.min.css" />
+    <link rel="stylesheet" href="../css/comm/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="../css/weyu/default.css" />
+    <link rel="stylesheet" href="../css/weyu/accountMaintain.css" />
+  </head>
+  <body>
+    <nav id="menuMain" class="navbar navbar-expand-md navbar-dark bg-opacity-10 mb-3" aria-label="Offcanvas navbar large">
+      <div class="container-fluid">
+        <div class="row w-100">
+          <!-- Left Section -->
+          <div class="col-5 d-flex align-items-center">
+            <a class="navbar-brand" href="../index.html">
+              <h1 class="fs-4 m-0 p-0"><img src="../img/weyu/brand.png" alt="Brand of JINTEX"></h1>
+            </a>
+            <a href="../index.html" class="d-flex backButton">
+              <img src="../img/weyu/icon-home-24.png">
+              <p class="m-0">首頁</p>
+            </a>
+            
+            <a href="../index.html" class="d-flex backButton">
+              <img src="../img/weyu/icon-back-24.png">
+              <p class="m-0">上一頁</p>
+            </a>
+          </div>
+    
+          <!-- Center Section -->
+          <div class="col-2 d-flex justify-content-center align-items-center">
+            <h2 class="fs-4 m-0 p-0 text-light">客戶帳號維護</h2>
+          </div>
+    
+          <!-- Right Section -->
+          <div class="col-5 d-flex justify-content-end align-items-center">
+            <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasNavbar2" aria-labelledby="offcanvasNavbar2Label">
+              <div class="offcanvas-body">
+                <ul class="navbar-nav justify-content-end flex-grow-1">
+                  <li class="nav-item dropdown">
+                    <div class="inline welcome mx-2">
+                      Welcome, <strong id="welcomeAccount"></strong>
+                    </div>
+                    <div class="inline welcome mx-2">
+                      <a href="" class="text-light"><img src="../img/comm/FontAwesome/earth-asia-solid.svg" alt="langue"> 繁體中文</a>
+                    </div>
+                    <div class="inline welcome mx-2">
+                      <a href="/JINTEX_EC/zz_query/cart.html" class="text-light" id="cartUrl"><img src="../img/comm/FontAwesome/cart-shopping-solid.svg" alt="cart"> 購物車</a>
+                    </div>
+                    <a class="inline nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      <img src="../img/weyu/user-gear-solid.svg" alt="Admin option">
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="#" id="accountStatus">使用者</a></li>
+                      <li><a class="dropdown-item" href="#" id="changePassword" onclick="openChangePwdModal()">修改密碼</a></li>
+                      <li><a class="dropdown-item" href="#" id="lineMenber" onclick="openLineMenberModal()">Line會員</a></li>
+                      <li><a class="dropdown-item" href="#" id="logout">登出</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      <div class="tableWrapper py-3">
+        <table id="accountsTable" class="display">
+          <thead>
+            <tr style="white-space: nowrap;">
+              <th>帳號</th>
+              <th>用戶名</th>
+              <th>客戶編號</th>
+              <th>客戶名稱</th>
+              <th>客戶簡稱</th>
+              <th>法人體系</th>
+              <th>法人體系簡稱</th>
+              <th>下單方式</th>
+              <th>重設密碼</th>
+            </tr>
+          </thead>
+          <tbody id="accountsContainer">
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 修改登入帳號 -->
+    <div class="modal fade" id="editAccountModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="editAccountModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-center">
+          <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="editAccountModalLabel">修改登入帳號</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <div class="row mb-1 ps-0">
+                  <label for="" class="col-3 text-end">舊帳號:</label>
+                  <div id="oldAccount" class="col-6"></div>
+              </div>
+              <div class="row ps-0">
+                  <label for="newAccount" class="col-3 text-end">新帳號:</label>
+                  <input type="text" id="newAccount" class="col-6">
+              </div>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">返回</button>
+              <button type="button" class="btn btn-primary" onclick="editSave()">保存</button>
+          </div>
+          </div>
+      </div>
+      </div>
+
+    <footer class="footer mt-auto py-3 text-center">
+      <div class="container-fluid">
+        <small class="">© COPYRIGHT – WEYU TECHNOLOGY CO.,LTD.</small>
+      </div>
+    </footer>
+    <script src="../js/comm/bootstrap.bundle.min.js"></script>
+    <script src="../js/comm/jquery-3.7.1.min.js"></script>
+    <script src="../js/comm/jquery.dataTables.min.js"></script>
+    <script src="../js/weyu/weyu_config.js"></script>
+    <script src="../js/weyu/weyu_comm_api_function.js"></script>
+    <script src="accountMaintain-custom.js"></script>
+    <script src="../js/weyu/weyu_header.js"></script>
+
+  </body>
+</html>

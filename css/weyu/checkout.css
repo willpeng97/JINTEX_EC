@@ -1,0 +1,26 @@
+* {
+    color: black;
+}
+
+input {
+    border: 1px solid rgb(194, 194, 194) !important;
+    /* cursor: default!important; */
+}
+aside,
+label {
+    color: #333;
+}
+
+/* #address {
+    background-color: #ffcccc;
+    border: 2px solid #ff2929ce !important;
+    color: #000000;
+    font-weight: bold;
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+    cursor: not-allowed;
+} */
+
+.required label:after {
+    color: red;
+    content:"*";
+}

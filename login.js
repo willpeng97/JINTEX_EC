@@ -1,0 +1,239 @@
+
+$(document).ready(function () {
+  getServerCSRFToken();
+});
+
+const login = document.querySelector('#login');
+
+let ApiURL = window.location.protocol+'//'+default_ip+'/'+default_Api_Name+'/WeyuLoginV2/';
+
+let LoginURL = ApiURL+ 'Weyu_Login';
+
+//如果已經登入 則返回 index頁
+if(localStorage.getItem(PROJECT_SAVE_NAME+'_BI_userName') === null&&localStorage.getItem(PROJECT_SAVE_NAME+'_BI_TokenKey') === null&&localStorage.getItem(PROJECT_SAVE_NAME+'_BI_Refresh_TokenKey') === null){
+
+}
+else{
+      //轉址
+      // 指定要导航到的新URL
+      var newUrl = window.location.protocol+'//'+location.hostname + (location.port ? ':' + location.port : '')+'/'+PROJECT_NAME+'/index.html'; // 替换为您想要导航的URL
+      // 使用window.location.href来在同一页面内导航
+      window.location.href = newUrl;
+}
+
+// 按鈕登入
+login.addEventListener('click', userLogin);
+// ENTER
+document.getElementById('pw').addEventListener('keydown', function(event) {
+  if (event.key === 'Enter') {
+    // 如果用户按下ENTER键，执行登录
+    userLogin();
+  }
+});
+
+function userLogin() {
+  var inputUID = document.getElementById('id').value;
+  var inputPWD = document.getElementById('pw').value;
+  if (inputUID === '' || inputPWD === '') {
+    alert('Please enter your account and password.')
+    return;
+  }
+
+  let body = {
+    'UID': inputUID,
+    'PWD': inputPWD
+  }
+
+  $.ajax({
+    url: window.location.protocol+'//'+default_ip+'/'+default_Api_Name+'/api/WeyuLogin', // 替換為你的API端點
+    type: 'POST',
+    data: body,
+    dataType: 'json',
+    success: async function(response) {
+        // console.log(response)
+        if(response.result){
+          //判斷是否為首次登入
+          if(inputPWD==='DEMO'||inputPWD==='JINTEX'){
+            $("#changePwdModal").modal('show')
+            return
+          }
+
+          // 儲存 第一次的 TokenKey
+          localStorage.setItem(PROJECT_SAVE_NAME + '_BI_TokenKey', response.TokenKey);
+          // 儲存 Refresh_tokenkey *只存這一次
+          localStorage.setItem(PROJECT_SAVE_NAME + '_BI_Refresh_TokenKey', response.Refresh_TokenKey);
+
+          // 從SEC_USER 取得必要資料
+          let userData = await getUserData(inputUID)
+          localStorage.setItem(PROJECT_SAVE_NAME + '_BI_accountNo', userData.ACCOUNT_NO);
+          localStorage.setItem(PROJECT_SAVE_NAME + '_BI_ORIGINAL_ACCOUNT_NO', userData.ORIGINAL_ACCOUNT_NO);
+          if(userData.ACCOUNT_NO==='IT'){
+            localStorage.setItem(PROJECT_SAVE_NAME + '_BI_userName', 'IT');
+            localStorage.setItem(PROJECT_SAVE_NAME + '_BI_Account_Type', 'IT');
+          }else if(['00572','01256','01275'].includes(userData.ORIGINAL_ACCOUNT_NO)){
+            localStorage.setItem(PROJECT_SAVE_NAME + '_BI_userName', userData.NAM_EMP);
+            localStorage.setItem(PROJECT_SAVE_NAME + '_BI_Account_Type', 'IT');
+          }else{
+            switch(userData.CUSTOM_TYPE){
+              case 'Y':
+                localStorage.setItem(PROJECT_SAVE_NAME + '_BI_userName', userData.USER_NAME);
+                localStorage.setItem(PROJECT_SAVE_NAME + '_BI_PMAA005', userData.PMAA005);
+                localStorage.setItem(PROJECT_SAVE_NAME + '_BI_ORDER_LEV', userData.ORDER_LEV);
+                localStorage.setItem(PROJECT_SAVE_NAME + '_BI_PMAA001', userData.PMAA001);
+                localStorage.setItem(PROJECT_SAVE_NAME + '_BI_Account_Type', 'custom');
+                break;
+              case 'N':
+                localStorage.setItem(PROJECT_SAVE_NAME + '_BI_userName', userData.NAM_EMP);
+                localStorage.setItem(PROJECT_SAVE_NAME + '_BI_Account_Type', 'stuff');
+                break;
+            }
+          }
+
+          // 轉址
+          // 指定要导航到的新URL
+          var newUrl = window.location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '') + '/' + PROJECT_NAME + '/index.html'; // 替换为您想要导航的URL
+          // 使用window.location.href来在同一页面内导航
+          window.location.href = newUrl;
+        }else{
+          alert('Account or password input failed !')
+        }
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+        console.error('Error:', textStatus, errorThrown);
+        $('#postDataResult').text('Error: ' + textStatus + ', ' + errorThrown);
+    }
+  });
+}
+
+async function getUserData(ACCOUNT_NO) {
+  // 定义 GetGrid API 的 URL
+  let getGridURL = window.location.protocol+'//'+default_ip+'/'+default_Api_Name+'/api/GetGrid';
+
+  // 定义要传递的参数对象
+  let params = {
+      SID: "350990892916491",
+      TokenKey: localStorage.getItem(PROJECT_SAVE_NAME+'_BI_TokenKey')
+      // TokenKey: '302e24cbG8xfcHU/Z/vTzA1zYjVFHLfUNtqsWonT'
+  };
+
+  // 定义查詢条件参数对象
+  let conditions = {
+      // 每個SID 要塞的條件皆不同,塞錯會掛
+      Field: ["ACCOUNT_NO"],
+      Oper: ["="],
+      Value: [ACCOUNT_NO]
+  };
+
+  // 构建请求头
+  let headers = new Headers({
+      'Content-Type': 'application/json',
+      'SID': params.SID,
+      'TokenKey': params.TokenKey
+      // 可以添加其他必要的请求头信息
+  });
+
+  // 构建请求体
+  let requestBody = JSON.stringify(conditions);
+
+  // 构建请求配置
+  let requestOptions = {
+      method: 'POST', // 将请求方法设置为 "POST"
+      headers: headers,
+      body: requestBody // 将条件参数放入请求体
+  };
+
+  try {
+      // 发送请求并等待响应
+      let response = await fetch(getGridURL, requestOptions);
+
+      if (response.ok) {
+          // 解析响应为 JSON
+          let data = await response.json();
+          // console.log("获取Grid数据成功:", data);
+          if(data.result){
+              return data.Grid_Data[0];
+          }
+          else{
+              // Set_Clean();
+          }
+      } else {
+           throw new Error('获取Grid数据失败，状态码：' + response.status);
+          
+      }
+  } catch (error) {
+      console.error(error);
+  }
+}
+
+$("#savePwdChange").click(()=>{
+  let account = $("#id").val()
+  let newAccount = $("#newAccount").val()
+  let newPassword = $("#newPassword").val()
+  let newPassword_check = $("#newPassword_Check").val()
+  let yes = confirm('確定保存帳號設定嗎?')
+  if(yes){
+      if(newPassword.toUpperCase() === 'DEMO'){
+          alert('請使用"DEMO"以外的密碼!')
+      }else if(newPassword.toUpperCase() === 'JINTEX'){
+        alert('請使用"JINTEX"以外的密碼!')
+      }else if(newPassword !== newPassword_check){
+          alert('輸入密碼不一致!')
+      }else{
+          var is_go = true;
+          var sid = "";
+          $.ajax({
+              type: 'POST',
+              url: window.location.protocol+'//'+default_ip+'/'+default_WebSiteName+'/MasterSet/ResetPassword.ashx',
+              data: { action: 'GetAccountNo', account: account },
+              async: false,
+              success: function (msg) {
+                  resultJson = JSON.parse(msg);
+                  if (resultJson.result == "true") {
+                      sid = resultJson.sid;
+                  }
+                  else {
+                      is_go = false;
+                      alert("發生錯誤，請聯絡客服人員")
+                  }
+              }
+          });
+          if(is_go){
+            // 保存帳號
+            let EditSID = `USER_SID=${sid}`
+            let EditVal = `ACCOUNT_NO=N'${newAccount}',`
+            $.ajax({
+              type: 'post',
+              url: window.location.protocol+'//' + default_ip + '/' + default_WebSiteName + '/MasterMaintain/Model/MasterMaintainHandler.ashx',
+              data: { funcName: "UpdGridData", TableName: 'SEC_USER', SID: EditSID, EditVal: EditVal, USER: 'ADMIN',SID_VAL:"304100717100290",log_val : EditVal },
+              dataType: 'json',
+              async: false,
+              success: function (result) {
+                // 保存密碼
+                $.ajax({
+                  type: 'POST',
+                  url: window.location.protocol+'//'+default_ip+'/'+default_WebSiteName+'/MasterSet/ResetPassword.ashx',
+                  data: { action: 'ResetPassword', sid: sid, password: newPassword },
+                  async: false,
+                  success: function (msg) {
+                      resultJson = JSON.parse(msg);
+                      if (resultJson.result == "true") {
+                          $('#id').val(newAccount)
+                          $('#pw').val(newPassword)
+                          alert('帳號密碼設定完成!')
+                          userLogin()
+                      }
+                      else {
+                          alert('修改失敗!!')
+                      }
+                  }
+                });
+              },
+              error: function (xhr, ajaxOptions, thrownError) {
+                alert("該帳號已有人使用，請重新輸入!");
+              }
+            });
+            
+          }
+      }
+  }
+})

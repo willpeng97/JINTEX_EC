@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>電子下單平台 - JINTEX-</title>
+    <link rel="stylesheet" href="../css/comm/bootstrap.min.css" />
+    <link rel="stylesheet" href="../css/comm/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="../css/weyu/default.css" />
+    <link rel="stylesheet" href="../css/weyu/checkout.css" />
+  </head>
+  <body>
+    <!-- <nav
+      id="menuMain"
+      class="navbar navbar-expand-md navbar-dark bg-opacity-10"
+      aria-label="Offcanvas navbar large"
+    >
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html"
+          ><h1 class="fs-4 m-0 p-0">
+            <img src="../img/weyu/brand.png" alt="Brand of JINTEX" /></h1
+        ></a>
+        <a href="../index.html"><img src="../img/weyu/icon-back-24.png" id="backButton"></a>
+        <h2 class="fs-4 m-0 ml-3 p-0 text-light">結帳</h2>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasNavbar2"
+          aria-controls="offcanvasNavbar2"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon btn-close-white"></span>
+        </button>
+        <div
+          class="offcanvas offcanvas-end text-bg-dark"
+          tabindex="-1"
+          id="offcanvasNavbar2"
+          aria-labelledby="offcanvasNavbar2Label"
+        >
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasNavbar2Label">Menu</h5>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="offcanvas"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="offcanvas-body">
+            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+              <li class="nav-item dropdown">
+                <div class="inline welcome mx-2 text-white">
+                  Welcome, <strong class="text-white" id="welcomeAccount"></strong>
+                </div>
+                <div class="inline welcome mx-2">
+                  <a href="" class="text-light"
+                    ><img
+                      src="../img/comm/FontAwesome/earth-asia-solid.svg"
+                      alt="langue"
+                    />
+                     繁體中文</a
+                  >
+                </div>
+                <div class="inline welcome mx-2">
+                  <a href="./cart.html" class="text-light"
+                    ><img
+                      src="../img/comm/FontAwesome/cart-shopping-solid.svg"
+                      alt="cart"
+                    />
+                    購物車</a
+                  >
+                </div>
+                <a
+                  class="inline nav-link text-light dropdown-toggle"
+                  href="#"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  <img
+                    src="../img/weyu/user-gear-solid.svg"
+                    alt="Admin option"
+                  />
+                </a>
+                <ul class="dropdown-menu ">
+                  <li><a class="dropdown-item" href="#" id="accountStatus">使用者</a></li>
+                  <li><a class="dropdown-item" href="#" id="changePassword" onclick="openChangePwdModal()">修改密碼</a></li>
+                  <li><a class="dropdown-item" href="#" id="lineMenber" onclick="openLineMenberModal()">Line會員</a></li>
+                  <li><a class="dropdown-item" href="#" id="logout">登出</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav> -->
+    <nav id="menuMain" class="navbar navbar-expand-md navbar-dark bg-opacity-10 mb-3" aria-label="Offcanvas navbar large">
+      <div class="container-fluid">
+        <div class="row w-100">
+          <!-- Left Section -->
+          <div class="col-5 d-flex align-items-center">
+            <a class="navbar-brand" href="../index.html">
+              <h1 class="fs-4 m-0 p-0"><img src="../img/weyu/brand.png" alt="Brand of JINTEX"></h1>
+            </a>
+            <a href="../index.html" class="d-flex backButton">
+              <img src="../img/weyu/icon-home-24.png">
+              <p class="m-0">首頁</p>
+            </a>
+            
+            <a href="../index.html" class="d-flex backButton">
+              <img src="../img/weyu/icon-back-24.png">
+              <p class="m-0">上一頁</p>
+            </a>
+          </div>
+    
+          <!-- Center Section -->
+          <div class="col-2 d-flex justify-content-center align-items-center">
+            <h2 class="fs-4 m-0 p-0 text-light">結帳</h2>
+          </div>
+    
+          <!-- Right Section -->
+          <div class="col-5 d-flex justify-content-end align-items-center">
+            <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasNavbar2" aria-labelledby="offcanvasNavbar2Label">
+              <div class="offcanvas-body">
+                <ul class="navbar-nav justify-content-end flex-grow-1">
+                  <li class="nav-item dropdown">
+                    <div class="inline welcome mx-2">
+                      Welcome, <strong id="welcomeAccount"></strong>
+                    </div>
+                    <div class="inline welcome mx-2">
+                      <a href="" class="text-light"><img src="../img/comm/FontAwesome/earth-asia-solid.svg" alt="langue"> 繁體中文</a>
+                    </div>
+                    <div class="inline welcome mx-2">
+                      <a href="/JINTEX_EC/zz_query/cart.html" class="text-light" id="cartUrl"><img src="../img/comm/FontAwesome/cart-shopping-solid.svg" alt="cart"> 購物車</a>
+                    </div>
+                    <a class="inline nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      <img src="../img/weyu/user-gear-solid.svg" alt="Admin option">
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="#" id="accountStatus">使用者</a></li>
+                      <li><a class="dropdown-item" href="#" id="changePassword" onclick="openChangePwdModal()">修改密碼</a></li>
+                      <li><a class="dropdown-item" href="#" id="lineMenber" onclick="openLineMenberModal()">Line會員</a></li>
+                      <li><a class="dropdown-item" href="#" id="logout">登出</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <div
+      class="container py-3 border-info border-opacity-20 rounded-3 shadow-sm"
+      style="background-color:#D1EFFF"
+    >
+      <div class="row g-5 text-light">
+        <div class="col-md-6 order-md-last">
+          <!-- <h4 class="d-flex justify-content-between align-items-center mb-3">
+            <span class="">Item list:</span>
+          </h4> -->
+
+          <!-- Checkout Page Template -->
+          <div id="checkout">
+            <ul class="list-group mb-3" id="checkoutList">
+              <li class="list-group-item d-flex justify-content-between lh-sm">
+                <div class="col-7">
+                  <h6 class="my-0 fs-5 fw-bold">品名</h6>
+                </div>
+                <div class="col-5">
+                  <div class="d-flex text-end">
+                    <h6 class="col-12 fs-5 fw-bold">購買量</h6>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <button
+            class="w-100 btn btn-warning btn-lg fw-bold"
+            id="Checkout"
+          >
+            送出訂單
+          </button>
+          <a href="cart.html" class="w-100 btn btn-success btn-lg my-4 fw-bold"
+            >修改購物車</a
+          >
+          <a
+            href="product.html"
+            class="w-100 btn btn-primary btn-lg my-2 text-light fw-bold"
+            >添加商品</a
+          >
+        </div>
+        <div class="col-md-6 col-lg-6 aside">
+          <h4 class="mb-3">訂單資訊</h4>
+          <div class="row g-3">
+            <div class="col-12">
+              <labiel for="customer" class="form-label fw-bold">客戶</labiel>
+              <input type="text" class="form-control" id="customer" disabled />
+            </div>
+
+            <div class="col-12">
+              <labiel for="purchaser" class="form-label fw-bold">訂購人</labiel>
+              <input type="text" class="form-control" id="purchaser" disabled />
+            </div>
+
+            <div class="col-12 required">
+              <label for="address" class="form-label fw-bold">送貨地址</label>
+              <select class="form-select" id="address" aria-label="Default select example">
+                <option value="地址一">地址一</option>
+                <option value="地址二">地址二</option>
+                <option value="地址三">地址三</option>
+              </select>
+              <!-- <img src="../img/weyu/pencil.png"> -->
+            </div>
+            <div class="col-12 required">
+              <label for="receiver" class="form-label fw-bold">收貨人</label>
+              <input type="text" class="form-control" id="receiver"  />
+            </div>
+
+            <div class="col-12">
+              <label for="purchase-order" class="form-label fw-bold">採購單號(選填)</label>
+              <input
+                type="text"
+                class="form-control"
+                id="purchase-order"
+                maxlength="20"
+              />
+            </div>
+            <div class="col-12">
+              <label for="remark" class="form-label fw-bold">備註</label>
+              <textarea
+                class="form-control"
+                id="remark"
+                maxlength="255"
+              ></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 隱藏的彈出視窗 START -->
+    <!-- 確認頁 -->
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">確認送出訂單?</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div id="selected-product">
+              <p>商品: </p>
+            </div>
+            <!-- <div id="total-price">金額: </div> -->
+          </div>
+          <div class="modal-footer d-flex justify-content-center">
+            <button
+              id="postOrder"
+              type="button"
+              class="btn btn-primary"
+              data-bs-toggle="modal"
+              data-bs-target=""
+            >
+              送出訂單
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 訂單完成訊息 -->
+    <div
+      class="modal fade"
+      id="successWrap"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="successWrapLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="successWrapLabel">訂單送出</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div id="successInfo" class="modal-body">
+            <p>已經收到您的訂單!</p>
+            <p>訂單編號:<span id="order-number"></span></p>
+          </div>
+          <div class="modal-footer d-flex justify-content-center">
+            <a href="./orderQuery.html?filter=today" class="btn btn-secondary">查看訂單</a>
+            <a href="../zz_query/product.html" class="btn btn-primary"
+              >繼續購物</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 訂單失敗訊息 -->
+    <div
+      class="modal fade"
+      id="failWrap"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="failWrapLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="failWrapLabel">訂單送出失敗</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div id="failInfo" class="modal-body">
+            <p>訂單資訊輸入錯誤!!</p>
+            <p id="errorMsg"></p>
+          </div>
+          <div class="modal-footer d-flex justify-content-center">
+            <a
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+              >修改</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 存值 -->
+    <input type="text" id="PMABSITE" style="display: none">
+
+    <footer class="footer mt-auto py-3 text-center">
+      <div class="container-fluid">
+        <small class="">© COPYRIGHT – WEYU TECHNOLOGY CO.,LTD.</small>
+      </div>
+    </footer>
+    <!-- 隱藏的彈出視窗 END -->
+    <script src="../js/comm/bootstrap.bundle.min.js"></script>
+    <script src="../js/comm/jquery-3.7.1.min.js"></script>
+    <script src="../js/comm/jquery.dataTables.min.js"></script>
+    <script src="../js/weyu/weyu_config.js"></script>
+    <script src="../js/weyu/weyu_comm_api_function.js"></script>
+    <script src="checkout.js"></script>
+    <script src="../js/weyu/weyu_header.js"></script>
+    <script>
+      new DataTable("#example", {
+        paging: false,
+        scrollCollapse: true,
+      });
+    </script>
+  </body>
+</html>

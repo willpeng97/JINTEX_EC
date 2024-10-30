@@ -1,0 +1,6 @@
+html,
+body {
+  background: url(../../img/weyu/banner.jpg) 0 0 no-repeat;
+  background-size: cover cover;
+  scroll-behavior: smooth;
+}
