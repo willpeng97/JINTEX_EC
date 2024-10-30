@@ -124,6 +124,7 @@ $(document).ready(function () {
         getUnbindDetailTable();
     }).trigger('change')
 
+    $("#addPeopleBtn").click(()=>addPeople())
 });
 
 //群組列表
@@ -370,17 +371,6 @@ function unbind(master_sid) {
     };
     var BindDataTable = $('#MasterMaintainDetail').DataTable()
     BindDataTable.rows.add(BindData).draw();
-    // DetailTable.destroy();
-    // DetailTable = $('#MasterMaintainDetail').DataTable({
-    //      "data": BindData,
-    //      "columns": [ // 列的標題一般是從DOM中讀取（也可以使用這個屬性為表格創建列標題)
-    //      { title: "是否啟用" },
-    //      { title: "功能名稱" },
-    //      { title: "Url" },
-    //      ]
-
-    // });
-    //$("#progress,#loading").fadeOut(2000);
 };
 
 //新增
@@ -532,28 +522,6 @@ function onlyUnbind(master_sid) {
     //$("#progress,#loading").fadeOut(2000);
 };
 
-//取得全部功能清單
-// function getDetailTable(){
-//     BindData = [];
-//     AllGridData = [];
-//     FUN_SID_ORIGIN_BIND_LIST = [];
-//     FUN_SID_ALL_BIND_LIST = [];
-//     FUN_SID_BIND_LIST = [];
-//     FUN_SID_UNBIND_LIST = [];
-//     FUN_SID_DEL_LIST = [];
-
-//     const masterSID = $("#MMList").find(":selected").val();
-
-//     if(!masterSID) return //若沒有選擇主體，則中斷執行
-//     DetailTable.destroy();
-//     $('#MasterMaintainDetail').empty();
-//     $('#MasterMaintainDetail').append('<thead><tr id="trDT"></tr></thead>');
-//     bind(masterSID);
-//     unbind(masterSID);
-//     enable_flag_num = 0;
-//     $("#progress,#loading").fadeOut(2000);
-// };
-
 //取得已綁定功能清單 (顯示在主畫面)
 function getBindDetailTable(){
     BindData = [];
@@ -628,40 +596,9 @@ function getAdd_List(){
         });
     })
 };
-// //組成欲刪除的清單
-// function getDel_List(){
-//     var checkGroup = $("input[name='enable_flag']");
-//     //var pageNum = document.getElementsByClassName('paginate_button current')[0].innerText;
-//     checkGroup.each(function(i){
-//         $(this).click(function(){
-//             var ArrayNum = Number(this.id.replace('enable_flag',''));
-//             if (this.checked == true){
-//                 FUN_SID_ALL_BIND_LIST.push(AllGridData[ArrayNum][1]);
-//                 for (var j = 0; j < FUN_SID_DEL_LIST.length; j++)
-//                 {
-//                     if (FUN_SID_DEL_LIST[j] == AllGridData[ArrayNum][0])
-//                     {
-//                         FUN_SID_DEL_LIST.splice(j,1);
-//                     }
-//                 }
-//             }
-//             else
-//             {
-//                 for (var k = 0; k < FUN_SID_ORIGIN_BIND_LIST.length; k++)
-//                 {
-//                     if (FUN_SID_ORIGIN_BIND_LIST[k] == AllGridData[ArrayNum][1])
-//                     {
-//                         FUN_SID_DEL_LIST.push(AllGridData[ArrayNum][0]);
-//                     }
-//                 }
-//             }
-//         });
-//     })
-// };
-
 
 //儲存選擇結果
-async function addSave() {
+async function addPeople() {
     const yes = await customConfirm("確定要儲存設定嗎?");
     if (yes) {
         try {
@@ -689,18 +626,6 @@ async function removePeople(GROUP_LIST_SID) {
         getUnbindDetailTable();
     }
 }
-
-
-//重置DataTable
-// async function ResetDataTable(){
-//     // var yes = confirm("Confirm to Reset?");
-//     var yes = await customConfirm("確定要重置設定嗎?");
-//     if (yes)
-//     {
-//         document.getElementById('selectShowAll').checked = true;
-//         // getDetailTable();
-//     }
-// }
 
 function GetLangDataV2(str){
     // 暫時沒有套用多語系
