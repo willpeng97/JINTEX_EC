@@ -26,6 +26,7 @@ async function fetchData() {
       price: detail.PRICE||1,
       quantity: detail.QUANTITY_ORDERED,
       INVAIL_FLAG: detail.INVAIL_FLAG,
+      EXPORT_LOCK_FLAG: detail.EXPORT_LOCK_FLAG,
       deliveryDate: detail.DELIVERY_DATE.split('T')[0],
     };
   });
@@ -39,8 +40,25 @@ function displayCartProducts() {
   $('#cartProducts').empty();
 
   // 在数据加载完成后执行其他逻辑
+  var isEditable = true
   cartProducts.forEach(function (cartProduct) {
-    if(cartProduct.INVAIL_FLAG === 'N'){
+    if(cartProduct.INVAIL_FLAG === 'N' && cartProduct.EXPORT_LOCK_FLAG === 'Y'){
+      isEditable =  false
+      
+      var productHtml = `
+        <tr>
+          <td>${cartProduct.deliveryDate}</td>
+          <td>${cartProduct.name_en}</td>
+          <td>${cartProduct.name}</td>
+          <td>
+            <div>${cartProduct.quantity}kg</div>
+            <div style="font-wight: 100; font-size: 0.8rem">(滿桶: ${parseInt(cartProduct.quantity / cartProduct.unit)} 桶 / 未滿桶: ${cartProduct.quantity % cartProduct.unit} kg)</div>
+          </td>
+          <td>訂單審核中</td>
+        </tr>
+      `;
+      $('#cartProducts').append(productHtml);
+    }else if(cartProduct.INVAIL_FLAG === 'N'){
       var productHtml = `
         <tr>
           <td><input type="date" min="${today}" onchange="updateDeliveryDate(this,'${cartProduct.sid}')" value="${cartProduct.deliveryDate}"></td>
@@ -54,16 +72,18 @@ function displayCartProducts() {
             <button onclick="openDeleteDetailModal(${cartProduct.sid})" class="btn btn-danger">
               <img src="../img/comm/FontAwesome/trash-solid.svg" alt="remove" />
             </button>
-            <button onclick="openEditModal('${cartProduct.sid}')" class="btn btn-success" >
+            <button onclick="openEditModal('${cartProduct.sid}')" class="btn btn-success">
               <img src="../img/comm/FontAwesome/pen-to-square-solid.svg" alt="edit" />
             </button>
           </td>
         </tr>
       `;
       $('#cartProducts').append(productHtml);
+      
     }
   });
 
+  if(isEditable) $("#cancelBtn").show()
 
   // Update the total number of items
   $('#totalItems').text(getTotalItems(cartProducts));

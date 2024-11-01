@@ -16,7 +16,7 @@ let filter = URLparams.get('filter');
 // 取得日期 用於過濾訂單日期
 let today = (new Date()).toLocaleDateString('en-CA'); // ex: 2024-01-01
 
-let table1, table2
+let tableA1, tableA2, tableB
 
 $(document).ready(async function() {
     orderGrid_A = await getGridDataOrder('EC',orderGridSID_A)
@@ -100,6 +100,7 @@ function getGridDataOrder(TYPE,SID) {
 function displayOrders_A(orderGrid_A){
     orderGrid_A.forEach(function (order) {
         if(order.EXPORT_LOCK_FLAG === 'N'){
+            // 訂單送出
             let orderHtml = `
                 <tr>
                     <td>${order.ORDER_NUMBER}</td>
@@ -116,37 +117,144 @@ function displayOrders_A(orderGrid_A){
                 </tr>
             `;
 
-            $("#orderContainer_A").append(orderHtml);
+            $("#orderContainer_A1").append(orderHtml.trim());
+        }
+        else if(order.EXPORT_LOCK_FLAG === 'Y' && !order.XMDADOCNO){
+            // 審核中
+            let orderHtml = `
+                <tr>
+                    <td>${order.ORDER_NUMBER}</td>
+                    <td>${order.PMAAL004_A}</td>
+                    <td>${order.USER_NAME}</td>
+                    <td>${order.ADDRESS}</td>
+                    <td>${order.PURCHASE_ORDER||''}</td>
+                    <td>${order.ORDER_DATE.split('T')[0]}</td>
+                    <td>
+                        <button class="btn btn-success" onclick="viewDetail_EC('${order.ORDER_NUMBER}','${order.ZZ_ORDER_RECORD_SID}')">
+                            <img src="../img/comm/FontAwesome/document.svg" alt="edit">
+                        </button>
+                    </td>
+                </tr>
+            `;
+
+            $("#orderContainer_A2").append(orderHtml.trim());
         }
     });
 
-    //第一個Table(EC)
-    table1 = new DataTable("#table1", {
+    //第一個Table(EC訂單送出)
+    tableA1 = new DataTable("#tableA1", {
         paging: true,
         scrollCollapse: true,
+        autoWidth: false,
+        columns: [
+            { width: "10%" }, // 第一列寬度
+            { width: "15%" },
+            { width: "15%" },
+            { width: "25%" },
+            { width: "15%" },
+            { width: "15%" },
+            { width: "5%" }
+        ],
         pageLength: 10, // 預設每頁顯示10筆資料
         order: [[5, "desc" ]],
-        // columnDefs: [{
-        //     orderable:false,
-        //     target:[7]
-        // }],
+        columnDefs: [{
+            orderable:false,
+            target:[6]
+        }],
         initComplete: function() {
-            $("#table1_filter").hide() // 隱藏dataTable原生搜尋欄
+            $("#tableA1_filter").hide() // 隱藏dataTable原生搜尋欄
             // 關鍵字搜尋
-            $('#search-keyword_A').on('keyup change', function() {
-                table1.search(this.value).draw();
+            $('#search-keyword_A1').on('keyup change', function() {
+                tableA1.search(this.value).draw();
             });
             // 日期搜尋
-            $('#search-from_A').on('change', function() {
-                table1.draw();
+            $('#search-from_A1').on('change', function() {
+                tableA1.draw();
             });
-            $('#search-to_A').on('change', function() {
-                table1.draw();
+            $('#search-to_A1').on('change', function() {
+                tableA1.draw();
             });
             $.fn.dataTable.ext.search.push( //為dataTable添加自定義的搜尋函數，用於搜尋日期範圍
                 function(settings, data, dataIndex) {
-                    var min = $('#search-from_A').val() ? $('#search-from_A').val() + " 00:00:00" : ""
-                    var max = $('#search-to_A').val() ? $('#search-to_A').val() + " 23:59:59" : ""
+                    var min = $('#search-from_A1').val() ? $('#search-from_A1').val() + " 00:00:00" : ""
+                    var max = $('#search-to_A1').val() ? $('#search-to_A1').val() + " 23:59:59" : ""
+                    var date = data[5]; // 下單時間在第 6 欄
+        
+                    if (
+                        (min === "" && max === "") ||
+                        (min === "" && date <= max) ||
+                        (min <= date && max === "") ||
+                        (min <= date && date <= max)
+                    ) {
+                        return true;
+                    }
+                    return false;
+                }
+            );
+        },
+        language: {
+            "sProcessing": "處理中...",
+            "sLengthMenu": "每頁顯示 _MENU_ 項結果",
+            "sZeroRecords": "沒有匹配結果",
+            "sInfo": "顯示第 _START_ 至 _END_ 項結果，共 _TOTAL_ 項",
+            "sInfoEmpty": "顯示第 0 至 0 項結果，共 0 項",
+            "sInfoFiltered": "(由 _MAX_ 項結果過濾)",
+            "sInfoPostFix": "",
+            "sSearch": "搜尋:",
+            "sUrl": "",
+            "sEmptyTable": "表中資料為空",
+            "sLoadingRecords": "載入中...",
+            "sInfoThousands": ",",
+            "oPaginate": {
+                "sFirst": "首頁",
+                "sPrevious": "上一頁",
+                "sNext": "下一頁",
+                "sLast": "末頁"
+            },
+            "oAria": {
+                "sSortAscending": ": 以升序排列此列",
+                "sSortDescending": ": 以降序排列此列"
+            }
+        }
+    });
+    
+    //第二個Table(EC審核中)
+    tableA2 = new DataTable("#tableA2", {
+        paging: true,
+        scrollCollapse: true,
+        autoWidth: false,
+        columns: [
+            { width: "10%" }, // 第一列寬度
+            { width: "15%" },
+            { width: "15%" },
+            { width: "25%" },
+            { width: "15%" },
+            { width: "15%" },
+            { width: "5%" }
+        ],
+        pageLength: 10, // 預設每頁顯示10筆資料
+        order: [[5, "desc" ]],
+        columnDefs: [{
+            orderable:false,
+            target:[6]
+        }],
+        initComplete: function() {
+            $("#tableA2_filter").hide() // 隱藏dataTable原生搜尋欄
+            // 關鍵字搜尋
+            $('#search-keyword_A2').on('keyup change', function() {
+                tableA2.search(this.value).draw();
+            });
+            // 日期搜尋
+            $('#search-from_A2').on('change', function() {
+                tableA2.draw();
+            });
+            $('#search-to_A2').on('change', function() {
+                tableA2.draw();
+            });
+            $.fn.dataTable.ext.search.push( //為dataTable添加自定義的搜尋函數，用於搜尋日期範圍
+                function(settings, data, dataIndex) {
+                    var min = $('#search-from_A2').val() ? $('#search-from_A2').val() + " 00:00:00" : ""
+                    var max = $('#search-to_A2').val() ? $('#search-to_A2').val() + " 23:59:59" : ""
                     var date = data[5]; // 下單時間在第 6 欄
         
                     if (
@@ -188,8 +296,8 @@ function displayOrders_A(orderGrid_A){
     });
 
     if(filter === 'today'){
-        $('#search-keyword_A').val(today)
-        $('#search-keyword_A').change()
+        $('#search-keyword_A1').val(today)
+        $('#search-keyword_A1').change()
     }
 }
 function displayOrders_B(orderGrid_B){
@@ -212,23 +320,23 @@ function displayOrders_B(orderGrid_B){
     });
 
     //第二個Table(ERP)
-    table2 = new DataTable("#table2", {
+    tableB = new DataTable("#tableB", {
         paging: true,
         scrollCollapse: true,
         pageLength: 10, // 預設每頁顯示10筆資料
         order: [[ 4, "desc" ]],
         initComplete: function() {
-            $("#table2_filter").hide() // 隱藏dataTable原生搜尋欄
+            $("#tableB_filter").hide() // 隱藏dataTable原生搜尋欄
             // 關鍵字搜尋
             $('#search-keyword_B').on('keyup change', function() {
-                table2.search(this.value).draw();
+                tableB.search(this.value).draw();
             });
             // 日期搜尋
             $('#search-from_B').on('change', function() {
-                table2.draw();
+                tableB.draw();
             });
             $('#search-to_B').on('change', function() {
-                table2.draw();
+                tableB.draw();
             });
             $.fn.dataTable.ext.search.push( //為dataTable添加自定義的搜尋函數，用於搜尋日期範圍
                 function(settings, data, dataIndex) {

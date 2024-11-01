@@ -41,6 +41,7 @@ td,th {
     justify-content: center;
     margin-top: 10px;
     margin-bottom: 15px;
+    border-bottom: 1px solid gainsboro;
 }
 .carousel-bar div {
     padding: 0 20px;

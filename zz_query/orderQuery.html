@@ -153,8 +153,9 @@
     </nav>
     <div class="tableContainer">
       <div class="carousel-bar">
-        <div data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active">處理中</div>
-        <div data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1">已確認</div>
+        <div data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active">訂單送出</div>
+        <div data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1">審核中</div>
+        <div data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2">訂單成立</div>
       </div>
       <!-- 輪播葉 -->
       <div id="carouselExampleIndicators" class="carousel slide">
@@ -165,13 +166,13 @@
               <div class="searchBar d-flex align-items-center">
                 <div class="me-4">*本查詢只提供三個月內之交易紀錄</div>
                 <div class="me-1">下單日期:</div>
-                <input type="date" id="search-from_A">
+                <input type="date" id="search-from_A1">
                 <div class="mx-1">~</div>
-                <input type="date" id="search-to_A">
+                <input type="date" id="search-to_A1">
                 <div class="ms-5 me-1">關鍵字:</div>
-                <input type="search" id="search-keyword_A" placeholder="請輸入搜尋關鍵字">
+                <input type="search" id="search-keyword_A1" placeholder="請輸入搜尋關鍵字">
               </div>
-              <table id="table1" class="display" style="width: 100%">
+              <table id="tableA1" class="display" style="width: 100%">
                 <thead>
                   <tr>
                     <th>EC訂單編號</th>
@@ -180,34 +181,49 @@
                     <th>送貨地址</th>
                     <th>採購單號</th>
                     <th>下單時間</th>
-                    <!-- <th>訂單狀態</th> -->
                     <th>明細</th>
                   </tr>
                 </thead>
-                <tbody id="orderContainer_A">
-                  <!-- <tr>
-                    <td>ECJX20240620001</td>
-                    <td>儒鴻-後龍-溪洲里</td>
-                    <td>呂素梅 小姐</td>
-                    <td>$11640</td>
-                    <td>苗栗縣後龍鎮溪洲里三好路39號</td>
-                    <td>2024-06-20 09:14:37.000</td>
-                    <td>訂單已確認</td>
-                    <td>
-                      <button class="btn btn-danger">
-                        <img src="../img/comm/FontAwesome/trash-solid.svg" alt="remove">
-                      </button>
-                      <button class="btn btn-success">
-                        <img src="../img/comm/FontAwesome/pen-to-square-solid.svg" alt="edit">
-                      </button>
-                    </td>
-                  </tr> -->
+                <tbody id="orderContainer_A1">
+                  <!-- 插入rowData -->
                 </tbody>
               </table>
             </div>
           </div>
+
           <div class="carousel-item">
             <!-- 第二個Table -->
+            <div class="tableWrapper">
+              <div class="searchBar d-flex align-items-center">
+                <div class="me-4">*本查詢只提供三個月內之交易紀錄</div>
+                <div class="me-1">下單日期:</div>
+                <input type="date" id="search-from_A2">
+                <div class="mx-1">~</div>
+                <input type="date" id="search-to_A2">
+                <div class="ms-5 me-1">關鍵字:</div>
+                <input type="search" id="search-keyword_A2" placeholder="請輸入搜尋關鍵字">
+              </div>
+              <table id="tableA2" class="display" style="width: 100%">
+                <thead>
+                  <tr>
+                    <th>EC訂單編號</th>
+                    <th>客戶</th>
+                    <th>購買人</th>
+                    <th>送貨地址</th>
+                    <th>採購單號</th>
+                    <th>下單時間</th>
+                    <th>明細</th>
+                  </tr>
+                </thead>
+                <tbody id="orderContainer_A2">
+                  <!-- 插入rowData -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="carousel-item">
+            <!-- 第三個Table -->
             <div class="tableWrapper">
               <div class="searchBar d-flex align-items-center">
                 <div class="me-4">*本查詢只提供三個月內之交易紀錄</div>
@@ -218,7 +234,7 @@
                 <div class="ms-5 me-1">關鍵字:</div>
                 <input type="search" id="search-keyword_B" placeholder="請輸入搜尋關鍵字">
               </div>
-              <table id="table2" class="display" style="width: 100%">
+              <table id="tableB" class="display" style="width: 100%">
                 <thead>
                   <tr>
                     <th>ERP單號</th>
