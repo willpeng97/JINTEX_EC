@@ -13,7 +13,6 @@ let table
 
 $(document).ready(async function() {
     orderGrid = await getGridDataOrder(orderGridSID)
-    console.log(orderGrid)
     displayOrders(orderGrid)
 });
 
@@ -63,32 +62,11 @@ function displayOrders(orderGrid){
     orderGrid.forEach(function (order) {
         let statusHtml;
         if(order.EXPORT_LOCK_FLAG === 'N'){
-            statusHtml = '<span style="color:#fda42d">處理中</span><img src="../img/weyu/clock.svg">'
+            statusHtml = '<span style="color:#fda42d">待處理</span><img src="../img/weyu/clock.svg">'
         }else{
-            statusHtml = '<span style="color:#2cba1e">已確認</span><img src="../img/weyu/check.svg">'
+            statusHtml = '<span style="color:#2cba1e">已匯出</span><img src="../img/weyu/check.svg">'
         }
 
-        // let orderHtml = `
-        //     <tr>
-        //         <td>${order.ORDER_NUMBER}</td>
-        //         <td>(業秘)</td>
-        //         <td>${order.PMAAL004_A}</td>
-        //         <td>${order.USER_NAME}</td>
-        //         <td class="text-end">$${formatNumber(order.TOTAL_AMOUNT)}</td>
-        //         <td>${order.ADDRESS}</td>
-        //         <td>${order.PURCHASE_ORDER||''}</td>
-        //         <td>${order.ORDER_DATE.replace('T',' ')}</td>
-        //         <td>${statusHtml}</td>
-        //         <td>
-        //             <button class="btn btn-success" onclick="viewDetail('${order.ORDER_NUMBER}','${order.ZZ_ORDER_RECORD_SID}')">
-        //                 <img src="../img/comm/FontAwesome/document.svg" alt="edit">
-        //             </button>
-        //         </td>
-        //         <td>
-        //             <input type="checkbox" data-order-sid="${order.ZZ_ORDER_RECORD_SID}">
-        //         </td>
-        //     </tr>
-        // `;
         let orderHtml = `
             <tr>
                 <td>${order.ORDER_NUMBER}</td>
