@@ -89,6 +89,8 @@ function userLogin() {
             }
           }
 
+          await GetMEMSMenu(inputUID)
+
           // 轉址
           // 指定要导航到的新URL
           var newUrl = window.location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '') + '/' + PROJECT_NAME + '/index.html'; // 替换为您想要导航的URL
@@ -237,3 +239,39 @@ $("#savePwdChange").click(()=>{
       }
   }
 })
+
+async function GetMEMSMenu(ACCOUNT_NO) {
+  // 定义 GetLang API 的 URL
+  let getLangURL = window.location.protocol+'//'+default_ip+'/'+default_Api_Name+'/api/GetMEMSMenu?ACCOUNT_NO=' + ACCOUNT_NO;
+
+  // 构建请求头
+  let headers = new Headers({
+      'Content-Type': 'application/json',
+      TokenKey : 'WEYU54226552', // 不檢查過期
+      // 可以添加其他必要的请求头信息
+  });
+
+  // 构建请求配置
+  let requestOptions = {
+      method: 'GET', // 使用 POST 请求方式
+      headers: headers,
+  };
+
+  try {
+      // 发送请求并等待响应
+      let response = await fetch(getLangURL, requestOptions);
+
+      if (response.ok) {
+          // 解析响应为 JSON
+          let data = await response.json();
+          let keys = data.data.map((e) => e.FUN_SID)
+
+          // 儲存 可使用的功能權限
+          localStorage.setItem(PROJECT_SAVE_NAME+'_BI_Fuctionkey', keys);
+      } else {
+          throw new Error('获取翻译包数据失败，状态码：' + response.status);
+      }
+  } catch (error) {
+      console.error(error);
+  }
+}
