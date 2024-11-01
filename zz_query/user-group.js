@@ -496,8 +496,15 @@ function onlyUnbind(master_sid) {
             });
         },
         drawCallback: function(){
+            $("input[name='enable_flag']").off("click");
             getAdd_List();
         },
+        columnDefs: [
+            {
+                targets: 3, // 關閉第 0 欄的排序
+                orderable: false
+            }
+        ],
         language: {
             "sProcessing": "處理中...",
             "sLengthMenu": "每頁顯示 _MENU_ 項結果",
@@ -566,7 +573,7 @@ function getUnbindDetailTable(){
 
     $('#addPeopleList').empty();
     $('#addPeopleList').append('<thead><tr id="trDT_addPeople"></tr></thead>');
-    //console.log("document_text:",optLabel);
+
     onlyUnbind(masterSID);
     enable_flag_num = 0;
     $("#progress,#loading").fadeOut(2000);
@@ -576,7 +583,7 @@ function getUnbindDetailTable(){
 //組成欲新增的清單
 function getAdd_List(){
     var checkGroup = $("input[name='enable_flag']");
-    console.log(checkGroup)
+
     //var pageNum = document.getElementsByClassName('paginate_button current')[0].innerText;
     checkGroup.each(function(i){
         $(this).click(function(){
@@ -594,11 +601,14 @@ function getAdd_List(){
                     }
                 }
             }
+
             FUN_SID_BIND_LIST = FUN_SID_ALL_BIND_LIST.filter((e)=>{
                 return FUN_SID_ORIGIN_BIND_LIST.indexOf(e) === -1;
             });
+            
         });
     })
+
 };
 
 //儲存選擇結果
