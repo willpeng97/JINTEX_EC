@@ -314,9 +314,16 @@ function Set_Clean(){
   localStorage.removeItem(PROJECT_SAVE_NAME+'_BI_Refresh_TokenKey');
   localStorage.removeItem(PROJECT_SAVE_NAME+'_BI_TokenKey');
   localStorage.removeItem(PROJECT_SAVE_NAME+'_BI_userName');
+  localStorage.removeItem(PROJECT_SAVE_NAME+'_BI_accountNo');
+  localStorage.removeItem(PROJECT_SAVE_NAME+'_BI_ORIGINAL_ACCOUNT_NO');
+  localStorage.removeItem(PROJECT_SAVE_NAME+'_BI_Functionkey');
+  localStorage.removeItem(PROJECT_SAVE_NAME+'_BI_ORDER_LEV');
+  localStorage.removeItem(PROJECT_SAVE_NAME+'_BI_PMAA001');
+  localStorage.removeItem(PROJECT_SAVE_NAME+'BI_PMAA005');
   localStorage.removeItem('cartProducts');
   localStorage.removeItem('subsidiary_code');
   localStorage.removeItem('subsidiary_name');
+
   // 失敗後導回 登入頁
   window.location.href = window.location.protocol+'//'+location.hostname + (location.port ? ':' + location.port : '')+'/'+PROJECT_NAME+'/login.html';
 

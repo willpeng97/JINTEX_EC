@@ -67,29 +67,21 @@ function userLogin() {
           let userData = await getUserData(inputUID)
           localStorage.setItem(PROJECT_SAVE_NAME + '_BI_accountNo', userData.ACCOUNT_NO);
           localStorage.setItem(PROJECT_SAVE_NAME + '_BI_ORIGINAL_ACCOUNT_NO', userData.ORIGINAL_ACCOUNT_NO);
-          if(userData.ACCOUNT_NO==='IT'){
-            localStorage.setItem(PROJECT_SAVE_NAME + '_BI_userName', 'IT');
-            localStorage.setItem(PROJECT_SAVE_NAME + '_BI_Account_Type', 'IT');
-          }else if(['00572','01256','01275'].includes(userData.ORIGINAL_ACCOUNT_NO)){
-            localStorage.setItem(PROJECT_SAVE_NAME + '_BI_userName', userData.NAM_EMP);
-            localStorage.setItem(PROJECT_SAVE_NAME + '_BI_Account_Type', 'IT');
-          }else{
-            switch(userData.CUSTOM_TYPE){
-              case 'Y':
-                localStorage.setItem(PROJECT_SAVE_NAME + '_BI_userName', userData.USER_NAME);
-                localStorage.setItem(PROJECT_SAVE_NAME + '_BI_PMAA005', userData.PMAA005);
-                localStorage.setItem(PROJECT_SAVE_NAME + '_BI_ORDER_LEV', userData.ORDER_LEV);
-                localStorage.setItem(PROJECT_SAVE_NAME + '_BI_PMAA001', userData.PMAA001);
-                localStorage.setItem(PROJECT_SAVE_NAME + '_BI_Account_Type', 'custom');
-                break;
-              case 'N':
-                localStorage.setItem(PROJECT_SAVE_NAME + '_BI_userName', userData.NAM_EMP);
-                localStorage.setItem(PROJECT_SAVE_NAME + '_BI_Account_Type', 'stuff');
-                break;
-            }
-          }
+          localStorage.setItem(PROJECT_SAVE_NAME + '_BI_userName', userData.USER_NAME);
+          localStorage.setItem(PROJECT_SAVE_NAME + '_BI_PMAA005', userData.PMAA005);
+          localStorage.setItem(PROJECT_SAVE_NAME + '_BI_ORDER_LEV', userData.ORDER_LEV);
+          localStorage.setItem(PROJECT_SAVE_NAME + '_BI_PMAA001', userData.PMAA001);
 
-          await GetMEMSMenu(inputUID)
+          let keys = ''
+          switch(userData.CUSTOM_TYPE){
+            case 'Y':
+              keys = '342975302766084,362922892413760,362923073246431,362923191016754'
+              break;
+            case 'N':
+              keys = await GetMEMSMenu(inputUID)
+              break;
+          }
+          localStorage.setItem(PROJECT_SAVE_NAME+'_BI_Functionkey', keys);
 
           // 轉址
           // 指定要导航到的新URL
@@ -266,8 +258,8 @@ async function GetMEMSMenu(ACCOUNT_NO) {
           let data = await response.json();
           let keys = data.data.map((e) => e.FUN_SID)
 
-          // 儲存 可使用的功能權限
-          localStorage.setItem(PROJECT_SAVE_NAME+'_BI_Fuctionkey', keys);
+          // 返回 可使用的功能權限
+          return keys
       } else {
           throw new Error('获取翻译包数据失败，状态码：' + response.status);
       }

@@ -11,7 +11,6 @@ var itemsPerPage = 12;
 var products = [];
 var formattedArray;
 
-var Account_Type = localStorage.getItem(PROJECT_SAVE_NAME+"_BI_Account_Type")
 var subsidiary_code = localStorage.getItem('subsidiary_code') // 所選子公司
 
 $('#searchInput').on('input', searchProducts);
