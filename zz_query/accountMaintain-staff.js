@@ -65,7 +65,13 @@ function displayAccounts(accountGrid){
             "sSortAscending": ": 以升序排列此列",
             "sSortDescending": ": 以降序排列此列"
         }
-    }
+    },
+    columnDefs: [
+      {
+          targets: 13, // 關閉第 0 欄的排序
+          orderable: false
+      }
+    ],
   });
 }
 
