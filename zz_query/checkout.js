@@ -10,7 +10,8 @@ $(document).ready(async function() {
   userData.forEach((e)=>{
     if(e.PMAA001 === localStorage.getItem('subsidiary_code')){
       $("#customer").val(e.PMAAL004_A);
-      $("#address").html(initAddressOption(e.OOFB017));
+      // $("#address").html(initAddressOption(e.OOFB017));
+      $("#address").val(e.OOFB017);
       $("#receiver").val(e.PMAJUA002)
       $("#PMABSITE").val(e.PMABSITE)
     }
@@ -145,9 +146,9 @@ $(document).ready(async function() {
 
 });
 
-function initAddressOption(addressStr){
-  let options = addressStr.split(',').map((opt) => {
-    return `<option value="${opt}">${opt}</option>`;
-  });
-  return options.join('');
-}
+// function initAddressOption(addressStr){
+//   let options = addressStr.split(',').map((opt) => {
+//     return `<option value="${opt}">${opt}</option>`;
+//   });
+//   return options.join('');
+// }
