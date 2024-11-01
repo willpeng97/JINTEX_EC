@@ -29,7 +29,8 @@ tr input[type='checkbox'] {
 }
 
 .hover-red{
-    opacity: 0.2;
+    opacity: 0.4;
+    transition: opacity 0.3s ease;
 }
 .hover-red:hover{
     opacity: 1;
