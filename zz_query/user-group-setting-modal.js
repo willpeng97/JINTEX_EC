@@ -5,9 +5,10 @@ $(document).ready(function () {
     }).trigger('change')
 
     //保存群組設定
-    $("#saveSettings").click(()=>settingSave(masterSID))
+    $("#saveSettingsBtn").click(()=>settingSave(masterSID))
 
     $("#createGroupBtn").click(()=>createGroup())
+    $("#deleteGroupBtn").click(()=>deleteGroup())
 })
 
 function setFunctionList(masterSID){
@@ -231,4 +232,26 @@ function createGroup(){
             alert(thrownError);
         }
     });
+}
+
+async function deleteGroup() {
+    let yes = await customConfirm(`確定要刪除 ${currentGroupName} 嗎?`);
+    if(yes){
+        $.ajax({
+            type: 'post',
+            url: window.location.protocol+'//' + default_ip + '/' + default_WebSiteName + '/MasterMaintain/Model/MasterMaintainHandler.ashx',
+            data: { funcName: "DelRowData", TableName: "SEC_USERGROUP", Delval: masterSID, SID: "GROUP_SID" ,SID_VAL : "50603545907267" ,USER: "ADMINV2" },
+            dataType: 'json',
+            async: false,
+            success: async function (result) {
+                await customAlertSuccess(`${currentGroupName} 已刪除`)
+                location.reload()
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                if (xhr.status = 500)
+                    alert("資料格式錯誤!");
+                alert(thrownError);
+            }
+        });
+    }
 }

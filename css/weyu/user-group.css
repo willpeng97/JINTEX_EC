@@ -28,8 +28,13 @@ tr input[type='checkbox'] {
     margin-bottom: 5px;
 }
 
+.hover-red{
+    opacity: 0.2;
+}
 .hover-red:hover{
-    color:rgb(252, 59, 59) !important
+    opacity: 1;
+    background: none !important;
+    color:rgba(254, 76, 76) !important
 }
 
 .settings-group {

@@ -30,6 +30,7 @@ var MD_Columns_Search_Data = '';
 var CurrentRow = [];
 
 var SID = '362764493233279' //Group User Setup EC
+var currentGroupName = ''
 
 $(document).ready(function () {
     //FROM BAS_MD_MAINTAIN
@@ -123,7 +124,8 @@ $(document).ready(function () {
         getBindDetailTable();
         getUnbindDetailTable();
 
-        $(".group-name").text($("#MMList option:selected").text())
+        currentGroupName = $("#MMList option:selected").text()
+        $(".group-name").text(currentGroupName)
     }).trigger('change')
 
     $("#addPeopleBtn").click(()=>addPeople())
