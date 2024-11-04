@@ -81,7 +81,7 @@ function getGridDataV2(SID) {
             dataType: 'json',
             contentType: 'application/json',
             headers: {
-                'TokenKey': localStorage.getItem('JINTEX_BI_TokenKey'), // 替換為你的自訂Header
+                'TokenKey': localStorage.getItem(PROJECT_SAVE_NAME+'_BI_TokenKey'), // 替換為你的自訂Header
                 'SID': SID
             },
             success: function(response) {

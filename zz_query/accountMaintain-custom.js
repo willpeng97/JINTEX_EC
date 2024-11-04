@@ -73,7 +73,7 @@ function misResetPassword(USER_SID){
     $.ajax({
         type: 'POST',
         url: window.location.protocol+'//'+default_ip+'/'+default_WebSiteName+'/MasterSet/ResetPassword.ashx',
-        data: { action: 'ResetPassword', sid: USER_SID, password: "DEMO" },
+        data: { action: 'ResetPassword', sid: USER_SID, password: "JINTEX" },
         async: false,
         success: function (msg) {
             resultJson = JSON.parse(msg);
