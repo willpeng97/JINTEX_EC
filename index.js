@@ -63,25 +63,19 @@ let Menudata_list = [
     "img": "img/weyu/btnPeople.svg",
     "fnKey":'362923233980783'
   },
-  {
-    "label": "最新消息",
-    // "link": "/zz_query/news.html",
-    "link": '/https://zh-tw.jintex-chemical.com/news.htm" target="_blank',
-    "img": "img/weyu/btnNews.svg",
-    "fnKey":'362923073246431'
-  },
+  // {
+  //   "label": "最新消息",
+  //   // "link": "/zz_query/news.html",
+  //   "link": '/https://zh-tw.jintex-chemical.com/news.htm" target="_blank',
+  //   "img": "img/weyu/btnNews.svg",
+  //   "fnKey":'362923073246431'
+  // },
   // {
   //   "label": "最新消息維護",
   //   "link": "/zz_query/newsMaintain.html",
   //   "img": "img/weyu/btnNews.svg",
   //   "fnKey":'362923093363190'
-  // },
-  {
-    "label": "官方網站",
-    "link": '/https://zh-tw.jintex-chemical.com/news.html" target="_blank',
-    "img": "img/weyu/btnPeople.svg",
-    "fnKey":'362923191016754'
-  }
+  // }
 ]
 
 // 跑迴圈長出按鈕
