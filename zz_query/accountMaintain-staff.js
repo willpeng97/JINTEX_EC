@@ -28,6 +28,16 @@ function displayAccounts(accountGrid){
         <td>${account.NAM_MANAGER}</td>
         <td>${account.MAIL_MANAGER}</td>
         <td>
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox"/>
+          </div>
+        </td>
+        <td>
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox"/>
+          </div>
+        </td>
+        <td>
           <img src="../img/weyu/icons-change.png" class="reset-password-Img" onclick="misResetPassword('${account.USER_SID}')">
         </td>
       </tr>
@@ -68,7 +78,7 @@ function displayAccounts(accountGrid){
     },
     columnDefs: [
       {
-          targets: 13, // 關閉第 0 欄的排序
+          targets: [13,14,15],
           orderable: false
       }
     ],

@@ -31,18 +31,7 @@ let Menudata_list = [
     "img": "img/weyu/btnGoods.svg",
     "fnKey":'362923040996286'
   },
-  {
-    "label": "最新消息",
-    "link": "/zz_query/news.html",
-    "img": "img/weyu/btnNews.svg",
-    "fnKey":'362923073246431'
-  },
-  {
-    "label": "最新消息維護",
-    "link": "/zz_query/newsMaintain.html",
-    "img": "img/weyu/btnNews.svg",
-    "fnKey":'362923093363190'
-  },
+
   {
     "label": "客戶帳號維護",
     "link": "/zz_query/accountMaintain-custom.html",
@@ -55,12 +44,7 @@ let Menudata_list = [
     "img": "img/weyu/btnPeople.svg",
     "fnKey":'362923151300829'
   },
-  {
-    "label": "官方網站",
-    "link": '/https://zh-tw.jintex-chemical.com/news.html" target="_blank',
-    "img": "img/weyu/btnPeople.svg",
-    "fnKey":'362923191016754'
-  },
+  
   {
     "label": "用戶登入紀錄",
     "link":  "/zz_query/user-login-log.html",
@@ -68,10 +52,35 @@ let Menudata_list = [
     "fnKey":'362923212130406'
   },
   {
+    "label": "LINE群組會員",
+    "link": "/zz_query/user-in-linegroup.html",
+    "img": "img/weyu/btnPeople.svg",
+    "fnKey":"363360476693996"
+  },
+  {
     "label": "群組權限管理",
     "link":  "/zz_query/user-group.html",
     "img": "img/weyu/btnPeople.svg",
     "fnKey":'362923233980783'
+  },
+  {
+    "label": "最新消息",
+    // "link": "/zz_query/news.html",
+    "link": '/https://zh-tw.jintex-chemical.com/news.htm" target="_blank',
+    "img": "img/weyu/btnNews.svg",
+    "fnKey":'362923073246431'
+  },
+  // {
+  //   "label": "最新消息維護",
+  //   "link": "/zz_query/newsMaintain.html",
+  //   "img": "img/weyu/btnNews.svg",
+  //   "fnKey":'362923093363190'
+  // },
+  {
+    "label": "官方網站",
+    "link": '/https://zh-tw.jintex-chemical.com/news.html" target="_blank',
+    "img": "img/weyu/btnPeople.svg",
+    "fnKey":'362923191016754'
   }
 ]
 

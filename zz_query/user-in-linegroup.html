@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../css/comm/bootstrap.min.css" />
     <link rel="stylesheet" href="../css/comm/jquery.dataTables.min.css" />
     <link rel="stylesheet" href="../css/weyu/default.css" />
-    <link rel="stylesheet" href="../css/weyu/accountMaintain.css" />
+    <link rel="stylesheet" href="../css/weyu/user-in-linegroup.css" />
   </head>
   <body>
     <nav id="menuMain" class="navbar navbar-expand-md navbar-dark bg-opacity-10 mb-3" aria-label="Offcanvas navbar large">
@@ -31,7 +31,7 @@
     
           <!-- Center Section -->
           <div class="col-2 d-flex justify-content-center align-items-center">
-            <h2 class="fs-4 m-0 p-0 text-light">員工帳號維護</h2>
+            <h2 class="fs-4 m-0 p-0 text-light">LINE群組會員</h2>
           </div>
     
           <!-- Right Section -->
@@ -67,31 +67,23 @@
       </div>
     </nav>
     <div class="container">
-      <div class="tableWrapper py-3">
-        <table id="accountsTable" class="display">
-          <thead>
-            <tr style="white-space: nowrap;">
-              <th>帳號</th>
-              <th>據點</th>
-              <th>狀態碼</th>
-              <th>企業編號</th>
-              <th>員工編號</th>
-              <th>員工名稱</th>
-              <th>歸屬部門代碼</th>
-              <th>歸屬部門</th>
-              <th>通訊方式識別碼</th>
-              <th>電子信箱</th>
-              <th>單位主管編號</th>
-              <th>單位主管名稱</th>
-              <th>單位主管電子信箱</th>
-              <th class="pe-3">LINE通知</th>
-              <th class="pe-3">E-Mail通知</th>
-              <th>重設密碼</th>
-            </tr>
-          </thead>
-          <tbody id="accountsContainer">
-          </tbody>
-        </table>
+      <div class="row">
+        <div class="col">
+          <div class="tableWrapper py-3">
+            <table id="gridTable" class="display" style="width: 100%">
+              <thead>
+                <tr>
+                  <th>用戶名稱</th>
+                  <th>客戶簡稱</th>
+                  <th>法人體系</th>
+                  <th>LINE ID</th>
+                </tr>
+              </thead>
+              <tbody id="gridContainer">
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -105,7 +97,7 @@
     <script src="../js/comm/jquery.dataTables.min.js"></script>
     <script src="../js/weyu/weyu_config.js"></script>
     <script src="../js/weyu/weyu_comm_api_function.js"></script>
-    <script src="accountMaintain-staff.js"></script>
+    <script src="user-in-linegroup.js"></script>
     <script src="../js/weyu/weyu_header.js"></script>
 
   </body>
