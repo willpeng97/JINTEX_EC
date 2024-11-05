@@ -402,28 +402,37 @@ function viewDetail_ERP(ORDER_NUMBER,XMDADOCNO){
 async function exportToXlsx(){
     let exportViewSID = '363449281123416' //V_ZZ_BTB_ORDER_V_EXPORT_XLSX
     let exportData = await getGridDataOrder('ERP',exportViewSID)
-    console.log(exportData)
 
-    return
-    // 從 DataTable 提取資料
+    // 初始化資料陣列，包含表頭列
     let data = [];
-    let headerArray = []
+    let headerArray = ["客戶","ERP單號","訂單日期","項次","英文品名","中文品名","總訂購數量","約定交貨日期","已出貨量","訂單合併狀態","資料來源","EC單號"];
+    // 定義要忽略的欄位
+    const ignoredFields = ["PMAA005", "PMAAL004_B", "XMDA004", "XMDC027"];
 
-    // 提取表頭
-    tableB.columns().header().each(function (header) {
-        headerArray.push($(header).text());
-    });
-    data.push(headerArray)
-    
-    // 提取表內容
-    tableB.rows({ search: 'applied' }).every(function(rowIdx, tableLoop, rowLoop) {
-        data.push(this.data()); // 將每列的資料加入
+    // 使用第一筆資料來提取欄位名稱
+    const sampleData = exportData[0];
+
+    // 建立表頭列，排除忽略的欄位
+    // for (let key in sampleData) {
+    //     if (!ignoredFields.includes(key)) {
+    //         headerArray.push(key);
+    //     }
+    // }
+    data.push(headerArray);
+
+    // 處理每筆資料
+    exportData.forEach((item) => {
+        let row = [];
+        for (let key in item) {
+            if (!ignoredFields.includes(key)) {
+                row.push(item[key]);
+            }
+        }
+        data.push(row);
     });
 
-    // 生成工作表
+    // 建立工作表和工作簿
     let ws = XLSX.utils.aoa_to_sheet(data);
-
-    // 建立工作簿
     let wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, "sheet1");
 
