@@ -8,12 +8,13 @@ $(document).ready(async function() {
   // 自動填入客戶資料
   userData = await getGridDataV2(userDataSID)
   userData.forEach((e)=>{
-    if(e.PMAA001 === localStorage.getItem('subsidiary_code')){
+    if(e.ORIGINAL_ACCOUNT_NO === localStorage.getItem(PROJECT_SAVE_NAME+'_BI_ORIGINAL_ACCOUNT_NO')){
       $("#customer").val(e.PMAAL004_A);
       // $("#address").html(initAddressOption(e.OOFB017));
       $("#address").val(e.OOFB017);
       $("#receiver").val(e.PMAJUA002)
       $("#PMABSITE").val(e.PMABSITE)
+      $("#USER_SID").val(e.USER_SID)
     }
   })
   $("#purchaser").val(localStorage.getItem(PROJECT_SAVE_NAME+'_BI_userName'));
@@ -125,7 +126,7 @@ $(document).ready(async function() {
           },
           success: function(response) {
             if(response.result==true){
-              console.log(response)
+              updateReceiver()
               localStorage.removeItem('cartProducts') //清空購物車
               var ORDER_NUMBER = JSON.parse(response.Grid_Data)[0]["ORDER_NUMBER"]
               $('#order-number').text(ORDER_NUMBER)
@@ -146,6 +147,19 @@ $(document).ready(async function() {
 
 });
 
+
+function updateReceiver(){
+  let username = localStorage.getItem(PROJECT_SAVE_NAME+'_BI_ORIGINAL_ACCOUNT_NO')
+  let SIDArray = `USER_SID=${$("#USER_SID").val()}`
+  let EditVal = `PMAJUA002=N'${$("#receiver").val()}',`
+  $.ajax({
+    type: 'post',
+    url: window.location.protocol+'//' + default_ip + '/' + default_WebSiteName + '/MasterMaintain/Model/MasterMaintainHandler.ashx',
+    data: { funcName: "UpdGridData", TableName: "SEC_USER", SID: SIDArray, EditVal: EditVal, USER: username,SID_VAL:304100717100290,log_val : EditVal },
+    dataType: 'json',
+    async: false,
+  });
+}
 // function initAddressOption(addressStr){
 //   let options = addressStr.split(',').map((opt) => {
 //     return `<option value="${opt}">${opt}</option>`;
