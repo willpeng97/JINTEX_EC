@@ -101,7 +101,7 @@ function userLogin() {
 
 async function getUserData(ACCOUNT_NO) {
   // 定义 GetGrid API 的 URL
-  let getGridURL = window.location.protocol+'//'+default_ip+'/'+default_Api_Name+'/api/GetGrid';
+  let getGridURL = window.location.protocol+'//'+default_ip+'/'+default_Api_Name+'/api/ZZ_GetGrid';
 
   // 定义要传递的参数对象
   let params = {

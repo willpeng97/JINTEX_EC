@@ -12,7 +12,7 @@ $(document).ready(async function() {
 function getGridDataOrder(SID) {
     return new Promise((resolve, reject) => {
         // 定义 GetGrid API 的 URL
-        let getGridURL = window.location.protocol+'//'+default_ip+'/'+default_Api_Name+'/api/GetGrid';
+        let getGridURL = window.location.protocol+'//'+default_ip+'/'+default_Api_Name+'/api/ZZ_GetGrid';
 
         // 定义查詢条件参数对象
         let conditions = {

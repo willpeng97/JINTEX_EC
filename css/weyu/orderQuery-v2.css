@@ -57,3 +57,10 @@ td,th {
 .tableContainer {
     margin: 0 20px;
 }
+
+.carousel-item {
+    transition: none; /* 關閉動畫效果 */
+}
+#exportBtnXlsx {
+    display: none;
+}

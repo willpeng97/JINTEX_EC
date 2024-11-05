@@ -24,20 +24,23 @@ $(document).ready(async function() {
     displayOrders_A(orderGrid_A)
     displayOrders_B(orderGrid_B)
 
-    
     // 監聽滑動事件
     $('.carousel-bar div').click(function () {
         // 移除所有按鈕的 active 樣式
         $('.carousel-bar div').removeClass('active');
         // 添加 active 樣式到當前選中的按鈕
         $(this).addClass('active');
+        // 是否顯示匯出按鈕
+        $(this).data('bs-slide-to') == 2 ? $("#exportBtnXlsx").show() : $("#exportBtnXlsx").hide()
     });
+    
+    $("#exportBtnXlsx").click(()=>exportToXlsx());
 });
 
 function getGridDataOrder(TYPE,SID) {
     return new Promise((resolve, reject) => {
         // 定义 GetGrid API 的 URL
-        let getGridURL = window.location.protocol+'//'+default_ip+'/'+default_Api_Name+'/api/GetGrid';
+        let getGridURL = window.location.protocol+'//'+default_ip+'/'+default_Api_Name+'/api/ZZ_GetGrid';
 
         // 定义查詢条件参数对象
         let conditions;
@@ -393,4 +396,37 @@ function viewDetail_ERP(ORDER_NUMBER,XMDADOCNO){
     let url  = window.location.protocol+"//" + default_ip +"/"+PROJECT_NAME+"/zz_query/orderQueryDetail-ERP.html?order=" + ORDER_NUMBER + "&erp=" + XMDADOCNO;
     // window.open(url)
     window.location.href = url
+}
+
+
+async function exportToXlsx(){
+    let exportViewSID = '363449281123416' //V_ZZ_BTB_ORDER_V_EXPORT_XLSX
+    let exportData = await getGridDataOrder('ERP',exportViewSID)
+    console.log(exportData)
+
+    return
+    // 從 DataTable 提取資料
+    let data = [];
+    let headerArray = []
+
+    // 提取表頭
+    tableB.columns().header().each(function (header) {
+        headerArray.push($(header).text());
+    });
+    data.push(headerArray)
+    
+    // 提取表內容
+    tableB.rows({ search: 'applied' }).every(function(rowIdx, tableLoop, rowLoop) {
+        data.push(this.data()); // 將每列的資料加入
+    });
+
+    // 生成工作表
+    let ws = XLSX.utils.aoa_to_sheet(data);
+
+    // 建立工作簿
+    let wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "sheet1");
+
+    // 匯出 Excel 檔案
+    XLSX.writeFile(wb, "已成立訂單.xlsx");
 }
