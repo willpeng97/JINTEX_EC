@@ -32,6 +32,12 @@ function displayCartProducts(orderDetailGrid) {
         <td>${detail.XMDD011}</td>
         <td>${detail.XMDD014}kg</td>
         <td>${detail.SUTS}</td>
+        <td>
+          ${detail.IS_CANCEL_REQUEST === 'Y'
+            ? "已申請取消"
+            : `<button class="w-100 m-0" style="height:1.8rem !important" onclick="cancelErpBody('${detail.ZZ_BTB_ORDER_V_SID}')">申請取消</button>`
+          }
+        </td>
       </tr>
     `;
     $('#cartProducts').append(productHtml);
@@ -87,5 +93,25 @@ function getGridDataOrderDetail(SID,XMDADOCNO) {
               reject('Error: ' + textStatus + ', ' + errorThrown);
           }
       });
+  });
+}
+
+function cancelErpBody(ZZ_BTB_ORDER_V_SID){
+  let username = localStorage.getItem(PROJECT_SAVE_NAME+'_BI_ORIGINAL_ACCOUNT_NO')
+  let SIDArray = `ZZ_BTB_ORDER_V_SID=${ZZ_BTB_ORDER_V_SID}`
+  let EditVal = `IS_CANCEL_REQUEST=N'Y',`
+  $.ajax({
+    type: 'post',
+    url: window.location.protocol+'//' + default_ip + '/' + default_WebSiteName + '/MasterMaintain/Model/MasterMaintainHandler.ashx',
+    data: { funcName: "UpdGridData", TableName: "ZZ_BTB_ORDER_V", SID: SIDArray, EditVal: EditVal, USER: username,SID_VAL:363459429230874,log_val : EditVal },
+    dataType: 'json',
+    async: false,
+    success:function(){
+      alert('取消申請已傳送')
+      location.reload()
+    },
+    error: function(){
+      alert('伺服器錯誤')
+    }
   });
 }
