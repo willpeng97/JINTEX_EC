@@ -404,22 +404,17 @@ async function exportToXlsx(){
     let exportViewSID = '363449281123416' //V_ZZ_BTB_ORDER_V_EXPORT_XLSX
     let exportData = await getGridDataOrder('ERP',exportViewSID)
 
+    // 過濾
+    let erpOrderNumber = tableB.column(0, { search: 'applied' }).data().toArray();
+    exportData = exportData.filter((row) => erpOrderNumber.includes(row.XMDADOCNO))
+
     // 初始化資料陣列，包含表頭列
     let data = [];
     let headerArray = ["客戶","ERP單號","訂單日期","項次","英文品名","中文品名","總訂購數量","約定交貨日期","已出貨量","訂單合併狀態","資料來源","EC單號"];
+    data.push(headerArray);
+    
     // 定義要忽略的欄位
     const ignoredFields = ["PMAA005", "PMAAL004_B", "XMDA004", "XMDC027"];
-
-    // 使用第一筆資料來提取欄位名稱
-    const sampleData = exportData[0];
-
-    // 建立表頭列，排除忽略的欄位
-    // for (let key in sampleData) {
-    //     if (!ignoredFields.includes(key)) {
-    //         headerArray.push(key);
-    //     }
-    // }
-    data.push(headerArray);
 
     // 處理每筆資料
     exportData.forEach((item) => {
