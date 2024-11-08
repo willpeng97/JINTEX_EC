@@ -433,14 +433,14 @@ async function exportToXlsx(){
     // 指定單元格為數字
     for (let row = 1; row < data.length; row++) {  // 從第一行數據開始（跳過標題行）
         // 處理 G 欄位
-        const cellAddressA = `A${row + 1}`;  // 例如 "A2", "A3" 等
+        const cellAddressA = `G${row + 1}`;
         if (ws[cellAddressA]) {
-            ws[cellAddressA].t = 'n';  // 設置為數字格式
+            ws[cellAddressA].t = 'n';
         }
         // 處理 I 欄位
-        const cellAddressG = `I${row + 1}`;  // 例如 "G2", "G3" 等
+        const cellAddressG = `I${row + 1}`;
         if (ws[cellAddressG]) {
-            ws[cellAddressG].t = 'n';  // 設置為數字格式
+            ws[cellAddressG].t = 'n';
         }
     }
 
