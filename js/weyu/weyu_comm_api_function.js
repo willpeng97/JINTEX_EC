@@ -319,7 +319,8 @@ function Set_Clean(){
   localStorage.removeItem(PROJECT_SAVE_NAME+'_BI_Functionkey');
   localStorage.removeItem(PROJECT_SAVE_NAME+'_BI_ORDER_LEV');
   localStorage.removeItem(PROJECT_SAVE_NAME+'_BI_PMAA001');
-  localStorage.removeItem(PROJECT_SAVE_NAME+'BI_PMAA005');
+  localStorage.removeItem(PROJECT_SAVE_NAME+'_BI_PMAA005');
+  localStorage.removeItem(PROJECT_SAVE_NAME+'_BI_ISMEMBER');
   localStorage.removeItem('cartProducts');
   localStorage.removeItem('subsidiary_code');
   localStorage.removeItem('subsidiary_name');
@@ -515,7 +516,12 @@ function openChangePwdModal(){
 }
 
 function openLineMenberModal(){
-    if($("#changePwdModal").length === 0){
+    if(localStorage.getItem(PROJECT_SAVE_NAME + '_BI_ISMEMBER') === 'Y'){
+        customAlertSuccess('您已經是LINE會員')
+        return
+    }
+
+    if($("#lineMenberModal").length === 0){
         $("body").append(`
             <div class="modal fade" id="lineMenberModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="lineMenberModalLabel" aria-hidden="true">
                 <div class="modal-dialog">

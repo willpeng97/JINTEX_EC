@@ -71,6 +71,7 @@ function userLogin() {
           localStorage.setItem(PROJECT_SAVE_NAME + '_BI_PMAA005', userData.PMAA005);
           localStorage.setItem(PROJECT_SAVE_NAME + '_BI_ORDER_LEV', userData.ORDER_LEV);
           localStorage.setItem(PROJECT_SAVE_NAME + '_BI_PMAA001', userData.PMAA001);
+          localStorage.setItem(PROJECT_SAVE_NAME + '_BI_ISMEMBER', userData.MEMBER);
 
           let keys = ''
           switch(userData.CUSTOM_TYPE){
