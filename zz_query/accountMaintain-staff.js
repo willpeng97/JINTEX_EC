@@ -5,7 +5,6 @@ let table;
 
 async function fetchData(){
   accountGrid = await getGridDataV2(accountGridSID)
-  console.log(accountGrid)
   displayAccounts(accountGrid)
 }
 fetchData()
@@ -29,12 +28,20 @@ function displayAccounts(accountGrid){
         <td>${account.MAIL_MANAGER}</td>
         <td>
           <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox"/>
+            <input
+              class="form-check-input"
+              type="checkbox" ${account.IS_SEND_LINE === 'Y' ? "checked" : ""}
+              onChange="toggleFlag('line',this,'${account.USER_SID}')"
+            />
           </div>
         </td>
         <td>
           <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox"/>
+            <input
+            class="form-check-input"
+            type="checkbox" ${account.IS_SEND_MAIL === 'Y' ? "checked" : ""}
+            onChange="toggleFlag('mail',this,'${account.USER_SID}')"
+            />
           </div>
         </td>
         <td>
@@ -104,4 +111,27 @@ function misResetPassword(USER_SID){
         }
     });
   }
+}
+
+
+function toggleFlag(type,target,USER_SID){
+  let username = localStorage.getItem(PROJECT_SAVE_NAME+'_BI_ORIGINAL_ACCOUNT_NO');
+  let SIDArray = `USER_SID=${USER_SID}`;
+  let EditVal;
+  switch(type){
+    case 'line':
+      EditVal = `IS_SEND_LINE=N'${target.checked ? 'Y' : 'N'}',`
+      break;
+    case 'mail':
+      EditVal = `IS_SEND_MAIL=N'${target.checked ? 'Y' : 'N'}',`
+      break;
+  }
+
+  $.ajax({
+    type: 'post',
+    url: window.location.protocol+'//' + default_ip + '/' + default_WebSiteName + '/MasterMaintain/Model/MasterMaintainHandler.ashx',
+    data: { funcName: "UpdGridData", TableName: "SEC_USER", SID: SIDArray, EditVal: EditVal, USER: username,SID_VAL:304100717100290,log_val : EditVal },
+    dataType: 'json',
+    async: false
+  });
 }
