@@ -37,6 +37,7 @@ function displayAccounts(accountGrid){
   });
   table = new DataTable("#accountsTable", {
     // paging: false,
+    stateSave: true,
     info: false,
     scrollCollapse: true,
     scrollX: true,

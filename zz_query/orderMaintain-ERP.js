@@ -73,6 +73,7 @@ function displayOrders(orderGrid){
     });
 
     table = new DataTable("#example", {
+        stateSave: true,
         paging: true,
         scrollCollapse: true,
         pageLength: 10, // 預設每頁顯示10筆資料

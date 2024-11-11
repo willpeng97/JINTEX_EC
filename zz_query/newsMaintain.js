@@ -57,6 +57,7 @@ function displayNews(newsGrid){
   });
   table = new DataTable("#newsTable", {
     // paging: false,
+    stateSave: true,
     info: false,
     scrollCollapse: true,
     scrollY: "60vh",

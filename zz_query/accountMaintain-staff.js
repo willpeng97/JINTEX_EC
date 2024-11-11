@@ -52,6 +52,7 @@ function displayAccounts(accountGrid){
     $("#accountsContainer").append(accountHtml);
   });
   table = new DataTable("#accountsTable", {
+    stateSave: true,
     // paging: false,
     info: false,
     scrollCollapse: true,

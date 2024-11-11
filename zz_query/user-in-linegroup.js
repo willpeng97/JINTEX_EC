@@ -22,6 +22,7 @@ function displayUser(userGrid){
     $("#gridContainer").append(userHtml);
   });
   table = new DataTable("#gridTable", {
+    stateSave: true,
     // paging: false,
     info: false,
     scrollCollapse: true,

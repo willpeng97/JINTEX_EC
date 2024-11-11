@@ -146,6 +146,7 @@ function displayOrders_A(orderGrid_A){
 
     //第一個Table(EC訂單送出)
     tableA1 = new DataTable("#tableA1", {
+        stateSave: true,
         paging: true,
         scrollCollapse: true,
         autoWidth: false,
@@ -223,6 +224,7 @@ function displayOrders_A(orderGrid_A){
     
     //第二個Table(EC審核中)
     tableA2 = new DataTable("#tableA2", {
+        stateSave: true,
         paging: true,
         scrollCollapse: true,
         autoWidth: false,
@@ -325,6 +327,7 @@ function displayOrders_B(orderGrid_B){
 
     //第二個Table(ERP)
     tableB = new DataTable("#tableB", {
+        stateSave: true,
         paging: true,
         scrollCollapse: true,
         pageLength: 10, // 預設每頁顯示10筆資料
