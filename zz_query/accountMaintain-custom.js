@@ -25,6 +25,8 @@ function displayAccounts(accountGrid){
           <a href="mailto:${account.OOFC012_B}">${account.OOFC012_B}</a>
         </td>
         <td>${account.ORDER_LEV}</td>
+        <td>${account.OOFB017}</td>
+        <td>${account.PMAJUA002}</td>
         <td>${account.PMABUAL005}</td>
         <td>
           <img src="../img/weyu/icons-change.png" class="reset-password-Img" onclick="misResetPassword('${account.USER_SID}')">
@@ -37,6 +39,7 @@ function displayAccounts(accountGrid){
     // paging: false,
     info: false,
     scrollCollapse: true,
+    scrollX: true,
     scrollY: "60vh",
     iDisplayLength: 10,
     // order: [[ 0, "desc" ]], //照日期排序
