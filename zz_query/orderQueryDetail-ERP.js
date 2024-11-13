@@ -35,7 +35,7 @@ function displayCartProducts(orderDetailGrid) {
         <td>
           ${detail.IS_CANCEL_REQUEST === 'Y'
             ? "已申請取消"
-            : detail.SUTS === '已出貨'
+            : detail.SUTS === '已出貨' || detail.XMDA007 !== 'A0'
             ? ""
             : `<button class="w-100 m-0" style="height:1.8rem !important" onclick="cancelErpBody('${detail.ZZ_BTB_ORDER_V_SID}')">申請取消</button>`
           }
