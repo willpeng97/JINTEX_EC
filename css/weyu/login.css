@@ -1,6 +1,8 @@
 html,
 body {
-  background: url(../../img/weyu/banner.jpg) 0 0 no-repeat;
-  background-size: cover cover;
-  scroll-behavior: smooth;
+  background: url(../../img/weyu/banner.jpg) no-repeat;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
 }
