@@ -285,7 +285,7 @@ function DeleteOrder(){
   };
   
   $.ajax({
-      url: window.location.protocol+'//'+default_ip+'/'+default_Api_Name+'/api/OPI_ORDER',
+      url: window.location.protocol+'//'+default_ip+'/'+default_Api_Name+'/api/DELETE_EC',
       type: 'DELETE',
       data: JSON.stringify(body), // 将body对象转换为JSON字符串
       dataType: 'json',

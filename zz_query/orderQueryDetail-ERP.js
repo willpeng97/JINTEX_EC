@@ -99,21 +99,27 @@ function getGridDataOrderDetail(SID,XMDADOCNO) {
 }
 
 function cancelErpBody(ZZ_BTB_ORDER_V_SID){
-  let username = localStorage.getItem(PROJECT_SAVE_NAME+'_BI_ORIGINAL_ACCOUNT_NO')
-  let SIDArray = `ZZ_BTB_ORDER_V_SID=${ZZ_BTB_ORDER_V_SID}`
-  let EditVal = `IS_CANCEL_REQUEST=N'Y',`
+  let body = {
+    "ZZ_BTB_ORDER_V_SID": ZZ_BTB_ORDER_V_SID,
+    "LOGIN_USER": localStorage.getItem(PROJECT_SAVE_NAME+'_BI_ORIGINAL_ACCOUNT_NO')
+  };
+
   $.ajax({
-    type: 'post',
-    url: window.location.protocol+'//' + default_ip + '/' + default_WebSiteName + '/MasterMaintain/Model/MasterMaintainHandler.ashx',
-    data: { funcName: "UpdGridData", TableName: "ZZ_BTB_ORDER_V", SID: SIDArray, EditVal: EditVal, USER: username,SID_VAL:363459429230874,log_val : EditVal },
-    dataType: 'json',
-    async: false,
-    success:function(){
-      alert('取消申請已傳送')
-      location.reload()
-    },
-    error: function(){
-      alert('伺服器錯誤')
-    }
+      url: window.location.protocol+'//'+default_ip+'/'+default_Api_Name+'/api/DELETE_ERP',
+      type: 'DELETE',
+      data: JSON.stringify(body), // 将body对象转换为JSON字符串
+      dataType: 'json',
+      contentType: 'application/json',
+      headers: {
+        'TokenKey': localStorage.getItem(PROJECT_SAVE_NAME+'_BI_TokenKey'), // 替換為你的自訂Header
+      },
+      success: function(response) {
+        $('#deleteOrderConfirmationModal').modal('hide')
+        alert('取消申請已送出!')
+        location.reload()
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        console.error('Error:', textStatus, errorThrown);
+      }
   });
 }
