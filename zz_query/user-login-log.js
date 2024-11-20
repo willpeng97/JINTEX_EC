@@ -151,6 +151,13 @@ function exportToXlsx(){
 
     // 生成工作表
     let ws = XLSX.utils.aoa_to_sheet(data);
+    Object.keys(ws).forEach(cellAddress => {
+		if (ws[cellAddress].t === 's' && !isNaN(ws[cellAddress].v)) {
+		  // 如果儲存格是字串類型且內容是數字，轉為數字格式
+		  ws[cellAddress].t = 'n';
+		  ws[cellAddress].v = parseFloat(ws[cellAddress].v);
+		}
+    });
 
     // 建立工作簿
     let wb = XLSX.utils.book_new();
