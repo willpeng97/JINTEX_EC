@@ -17,6 +17,9 @@ function displayUser(userGrid){
         <td>${user.PMAAL004_B}</td>
         <td>${user.PMAAL004_A}</td>
         <td>${user.LINE_ID}</td>
+        <td>
+          <button onclick="removeMember('${user.USER_SID}')">移除會員</button>
+        </td>
       </tr>
     `;
     $("#gridContainer").append(userHtml);
@@ -54,4 +57,25 @@ function displayUser(userGrid){
         }
     }
   });
+}
+
+function removeMember(USER_SID){
+  let yes = confirm('確定要將用戶移除LINE會員嗎?')
+  if(yes){
+    let EditSID = `USER_SID=${USER_SID}`
+    let EditVal = `MEMBER=NULL,LINE_ID=NULL,`
+    $.ajax({
+      type: 'post',
+      url: window.location.protocol+'//' + default_ip + '/' + default_WebSiteName + '/MasterMaintain/Model/MasterMaintainHandler.ashx',
+      data: { funcName: "UpdGridData", TableName: 'SEC_USER', SID: EditSID, EditVal: EditVal, USER: 'ADMIN',SID_VAL:"304100717100290",log_val : EditVal },
+      dataType: 'json',
+      async: false,
+      success: function (result) {
+        alert('移除會員成功!')
+        location.reload()
+      }
+    });
+
+  }
+
 }

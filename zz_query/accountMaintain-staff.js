@@ -22,7 +22,7 @@ function displayAccounts(accountGrid){
         <td>${account.COD_DEPT}</td>
         <td>${account.NAM_DEPT}</td>
         <td>${account.OOFC001}</td>
-        <td>${account.MAIL}</td>
+        <td>${account.MAIL}<img src="../img/weyu/icons-edit-40.png" class="edit-account-Img" onclick="editMail('${account.USER_SID}')"></td></td>
         <td>${account.MANAGER}</td>
         <td>${account.NAM_MANAGER}</td>
         <td>${account.MAIL_MANAGER}</td>
@@ -134,5 +134,31 @@ function toggleFlag(type,target,USER_SID){
     data: { funcName: "UpdGridData", TableName: "SEC_USER", SID: SIDArray, EditVal: EditVal, USER: username,SID_VAL:304100717100290,log_val : EditVal },
     dataType: 'json',
     async: false
+  });
+}
+
+
+// 修改信箱
+function editMail(USER_SID){
+  $("#editMailModal").data('USER_SID',USER_SID)
+  $("#editMailModal").modal('show')
+}
+
+function editMailSave(){
+  let USER_SID = $("#editMailModal").data('USER_SID')
+  let newMail = $("#newMail").val()
+
+  let EditSID =  `USER_SID=${USER_SID}`
+  let EditVal = `MAIL=N'${newMail}',`
+  $.ajax({
+    type: 'post',
+    url: window.location.protocol+'//' + default_ip + '/' + default_WebSiteName + '/MasterMaintain/Model/MasterMaintainHandler.ashx',
+    data: { funcName: "UpdGridData", TableName: 'SEC_USER', SID: EditSID, EditVal: EditVal, USER: 'ADMIN',SID_VAL:"304100717100290",log_val : EditVal },
+    dataType: 'json',
+    async: false,
+    success: function (result) {
+      alert('修改信箱成功!')
+      location.reload()
+    }
   });
 }

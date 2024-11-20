@@ -6,47 +6,6 @@
     height: 3rem;
 }
 
-/* #addModeBox {
-    text-align: center;
-    border-radius: 5px;
-    border: 0;
-    overflow: hidden;
-    padding: 0;
-    position: fixed;
-    max-width: 5rem;
-    right: 0;
-    top: 10rem;
-    z-index: 999;
-}
-#addModeBox button {
-    height: 5rem;
-    width: 5rem;
-    background-color: #0dbeff;
-    border-radius: 6px;
-    color: #333;
-    display: block;
-    line-height: 1.2rem;
-    margin: 0;
-    padding: .5rem 1rem;
-    text-decoration: none;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-#addModeBox button:hover {
-    background-color: #000;
-    border: 3px solid #0dbeff;
-    color: #fff;
-} */
-
-table button{
-    position: absolute;
-    right:10px;
-    width: 1.8rem;
-    height:1.8rem;
-}
-
-table button img {
-    height: 1rem!important;
-}
 
 #uploadfileImage {
     width: 100%;
