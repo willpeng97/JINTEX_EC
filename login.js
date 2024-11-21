@@ -277,7 +277,7 @@ async function forgetPwd(){
   let account = $("#forgetAccount").val()
   let sendMail = userData.OOFC012_B
   let resetLink = `https://cloud.weyutech.com/JINTEX_EC/resetPassword.html?account=${account}`
-  let AddVal = ` N'email', N'福盈 重設密碼通知信', N'請點以下連結進行密碼重設: ${resetLink}', N'${sendMail}',`
+  let AddVal = ` N'email', N'福盈 重設密碼通知信', N'請點以下連結進行密碼重設: \r\n${resetLink}', N'${sendMail}',`
   $.ajax({
       type: 'post',
       url: window.location.protocol+'//' + default_ip + '/' + default_WebSiteName + '/MasterMaintain/Model/MasterMaintainHandler.ashx',
@@ -285,7 +285,7 @@ async function forgetPwd(){
       dataType: 'json',
       async: false,
       success: async function (result) {
-          alert("重設密碼郵件已寄出，請至您的信箱確認!")
+          alert(`重設密碼郵件已寄送至以下信箱:\r\n${sendMail}`)
           $("#forgetPwdModal").modal('hide')
       },
       error: function (xhr, ajaxOptions, thrownError) {
