@@ -34,7 +34,7 @@
               />
               <label for="id">Account</label>
             </div>
-            <div class="form-floating mb-3">
+            <div class="form-floating">
               <input
                 type="password"
                 class="form-control"
@@ -43,6 +43,10 @@
               />
               <label for="pw">Password</label>
             </div>
+            <div class="text-end">
+              <p class="btn btn-outline-primary border-0 bg-transparent" data-bs-toggle="modal" data-bs-target="#forgetPwdModal">忘記密碼?</p>
+            </div>
+
             <button
               type="button"
               class="w-100 btn btn-lg btn-primary mb-3"
@@ -50,7 +54,6 @@
             >
               Login
             </button>
-            <div class="form-floating mb-3"></div>
           </form>
           <div class="mt-3 text-center">
             <small class="text-info text-opacity-50"
@@ -61,34 +64,60 @@
       </div>
     </div>
 
+    <!-- 首次登入設定帳密 -->
     <div class="modal fade" id="changePwdModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="changePwdModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="changePwdModalLabel">首次登入 設定帳號密碼</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-            <div class="row mb-1 ps-0">
-                <label for="newAccount" class="col-3 text-end">設定帳號:</label>
-                <input type="text" id="newAccount" class="col-6" autocomplete="off">
-            </div>
-            <div class="row mb-1 ps-0">
-                <label for="newPassword" class="col-3 text-end">設定密碼:</label>
-                <input type="password" id="newPassword" class="col-6" autocomplete="off">
-            </div>
-            <div class="row ps-0">
-                <label for="newPassword_Check" class="col-3 text-end">確認密碼:</label>
-                <input type="password" id="newPassword_Check" class="col-6" autocomplete="off">
-            </div>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">返回</button>
-            <button type="button" class="btn btn-primary" id="savePwdChange">保存</button>
-        </div>
-        </div>
+      <div class="modal-dialog">
+          <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="changePwdModalLabel">首次登入 設定帳號密碼</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <div class="row mb-1 ps-0">
+                  <label for="newAccount" class="col-3 text-end">設定帳號:</label>
+                  <input type="text" id="newAccount" class="col-6" autocomplete="off">
+              </div>
+              <div class="row mb-1 ps-0">
+                  <label for="newPassword" class="col-3 text-end">設定密碼:</label>
+                  <input type="password" id="newPassword" class="col-6" autocomplete="off">
+              </div>
+              <div class="row ps-0">
+                  <label for="newPassword_Check" class="col-3 text-end">確認密碼:</label>
+                  <input type="password" id="newPassword_Check" class="col-6" autocomplete="off">
+              </div>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">返回</button>
+              <button type="button" class="btn btn-primary" id="savePwdChange">保存</button>
+          </div>
+          </div>
+      </div>
     </div>
+    <!-- 忘記密碼 -->
+    <div class="modal fade" id="forgetPwdModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="forgetPwdModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+          <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="forgetPwdModalLabel">忘記密碼</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <div class="mb-1 ps-0 text-center">
+                  <p class="fw-lighter fs-6">
+                    請填入您的帳號<br>密碼重設信件將寄送到您的信箱中。
+                  </p>
+                  <label for="forgetAccount" class="text-center">帳號:</label>
+                  <input type="text" id="forgetAccount" class="col-6" autocomplete="off">
+              </div>
+          </div>
+          <div class="modal-footer justify-content-center">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">返回</button>
+              <button type="button" class="btn btn-primary" onclick="forgetPwd()">送出</button>
+          </div>
+          </div>
+      </div>
     </div>
+
     <script src="js/comm/jquery-3.7.1.min.js"></script>
     <script src="js/comm/bootstrap.bundle.min.js"></script>
     <script src="js/weyu/weyu_config.js"></script>
