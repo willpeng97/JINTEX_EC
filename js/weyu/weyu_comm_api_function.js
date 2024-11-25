@@ -1,7 +1,7 @@
 // 取得 grid API
 async function getGridData(SID) {
     // 定义 GetGrid API 的 URL
-    let getGridURL = window.location.protocol+'//'+default_ip+'/'+default_Api_Name+'/api/ZZ_GetGrid';
+    let getGridURL = window.location.protocol+'//'+default_ip+'/'+default_Api_Name+'/api/GetData';
   
     // 定义要传递的参数对象
     let params = {
@@ -61,7 +61,7 @@ async function getGridData(SID) {
 function getGridDataV2(SID) {
     return new Promise((resolve, reject) => {
         // 定义 GetGrid API 的 URL
-        let getGridURL = window.location.protocol+'//'+default_ip+'/'+default_Api_Name+'/api/ZZ_GetGrid';
+        let getGridURL = window.location.protocol+'//'+default_ip+'/'+default_Api_Name+'/api/GetData';
 
         // 定义查詢条件参数对象
         let conditions = {
