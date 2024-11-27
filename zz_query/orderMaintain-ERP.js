@@ -15,11 +15,15 @@ function getGridDataOrder(SID) {
         let getGridURL = window.location.protocol+'//'+default_ip+'/'+default_Api_Name+'/api/GetData';
 
         // 定义查詢条件参数对象
-        let conditions = {
-            // Field: [],
-            // Oper: [],
-            // Value: []
-        };
+        let conditions = {};
+
+        if(localStorage.getItem("isSalesman") === 'Y'){
+            conditions = {
+                Field: ["PMAB081"],
+                Oper: ["="],
+                Value: [localStorage.getItem(PROJECT_SAVE_NAME+'_BI_ORIGINAL_ACCOUNT_NO')]
+            };
+        }
 
         // 构建请求体
         let requestBody = JSON.stringify(conditions);
@@ -56,6 +60,7 @@ function displayOrders(orderGrid){
         let orderHtml = `
             <tr>
                 <td>${order.XMDADOCNO}</td>
+                <td>${order.PMABL081}</td>
                 <td>${order.XMDA007}</td>
                 <td>${order.XMDA004}</td>
                 <td>${order.PMAAL004_A}</td>
