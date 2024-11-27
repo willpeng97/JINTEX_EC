@@ -43,8 +43,9 @@
               />
               <label for="pw">Password</label>
             </div>
-            <div class="d-flex">
-              <p class="forgetBtn" data-bs-toggle="modal" data-bs-target="#forgetPwdModal">忘記密碼?</p>
+            <div class="d-flex px-1 pt-1">
+              <p class="infoBtn" data-bs-toggle="modal" data-bs-target="#forgetPwdModal">忘記密碼?</p>
+              <p class="ms-3 infoBtn" data-bs-toggle="modal" data-bs-target="#contactModal">聯絡我們</p>
             </div>
 
             <button
@@ -116,6 +117,24 @@
           </div>
           </div>
       </div>
+    </div>
+    <!-- 聯絡我們 -->
+    <div class="modal fade" id="contactModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="contactdModalLabel">聯絡我們</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>若有任何問題請洽業務秘書</p>
+                <p>電話: (03)3869968 分機:405 / 422</p>
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
+            </div>
+            </div>
+        </div>
     </div>
 
     <script src="js/comm/jquery-3.7.1.min.js"></script>

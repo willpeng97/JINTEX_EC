@@ -515,6 +515,7 @@ function openChangePwdModal(){
     $("#changePwdModal").modal('show')
 }
 
+// 加入LINE會員
 function openLineMenberModal(){
     if(localStorage.getItem(PROJECT_SAVE_NAME + '_BI_ISMEMBER') === 'Y'){
         customAlertSuccess('您已經是LINE會員')
@@ -638,4 +639,32 @@ async function generatePinCode() {
     } catch (error) {
         console.error(error);
     }
+}
+
+// 聯絡我們
+function openContactModal(){
+    if($("#contactModal").length === 0){
+        $("body").append(`
+            <div class="modal fade" id="contactModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="contactdModalLabel">聯絡我們</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>若有任何問題請洽業務秘書</p>
+                        <p>電話: (03)3869968 分機:405 / 422</p>
+                    </div>
+                    <div class="modal-footer d-flex justify-content-center">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        `)
+    }
+    
+    //打開modal
+    $("#contactModal").modal('show')
 }
