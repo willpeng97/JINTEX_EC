@@ -70,7 +70,7 @@ function displayOrders(orderGrid){
         let orderHtml = `
             <tr>
                 <td>${order.ORDER_NUMBER}</td>
-                <td>${order.PMABUAL005}</td>
+                <td>${order.PMABL081}</td>
                 <td>${order.PMAAL004_A}</td>
                 <td>${order.USER_NAME}</td>
                 <td>${order.ADDRESS}</td>
