@@ -61,7 +61,7 @@ function displayOrders(orderGrid){
             <tr>
                 <td>${order.XMDADOCNO}</td>
                 <td>${order.PMABL081}</td>
-                <td>${order.XMDA007.replace("A0","電商")}</td>
+                <td>${order.XMDA007 === "A0" ? "電商" : "其他"}</td>
                 <td>${order.XMDA004}</td>
                 <td>${order.PMAAL004_A}</td>
                 <td>${order.XMDA033}</td>

@@ -328,7 +328,7 @@ function displayOrders_B(orderGrid_B){
                 <td>${order.XMDA033}</td>
                 <td>${order.XMDA008}</td>
                 <td>${order.XMDADOCDT}</td>
-                <td>${order.XMDA007.replace("A0","電商")}</td>
+                <td>${order.XMDA007 === "A0" ? "電商" : "其他"}</td>
                 <td>
                     <button class="btn btn-success" onclick="viewDetail_ERP('${order.XMDA008}','${order.XMDADOCNO}')">
                         <img src="../img/comm/FontAwesome/document.svg" alt="edit">
