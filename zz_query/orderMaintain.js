@@ -22,7 +22,7 @@ function getGridDataOrder(SID) {
         let getGridURL = window.location.protocol+'//'+default_ip+'/'+default_Api_Name+'/api/GetData';
 
         // 定义查詢条件参数对象
-        let conditions;
+        let conditions = {};
 
         if(localStorage.getItem("isSalesman") === 'Y'){
             conditions = {
