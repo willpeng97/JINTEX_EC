@@ -53,6 +53,13 @@ function displayAccounts(accountGrid){
   });
   table = new DataTable("#accountsTable", {
     stateSave: true,
+    stateSaveParams: function (settings, data) {
+      // 只保存排序和分頁，不保存搜尋
+      data.search = {};
+      data.columns.forEach(column => {
+          column.search = {};
+      });
+    },
     // paging: false,
     info: false,
     scrollCollapse: true,

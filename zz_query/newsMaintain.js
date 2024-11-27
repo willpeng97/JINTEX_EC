@@ -58,6 +58,13 @@ function displayNews(newsGrid){
   table = new DataTable("#newsTable", {
     // paging: false,
     stateSave: true,
+    stateSaveParams: function (settings, data) {
+      // 只保存排序和分頁，不保存搜尋
+      data.search = {};
+      data.columns.forEach(column => {
+          column.search = {};
+      });
+  },
     info: false,
     scrollCollapse: true,
     scrollY: "60vh",

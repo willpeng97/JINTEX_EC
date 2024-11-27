@@ -26,6 +26,13 @@ function displayUser(userGrid){
   });
   table = new DataTable("#gridTable", {
     stateSave: true,
+    stateSaveParams: function (settings, data) {
+      // 只保存排序和分頁，不保存搜尋
+      data.search = {};
+      data.columns.forEach(column => {
+          column.search = {};
+      });
+    },
     // paging: false,
     info: false,
     scrollCollapse: true,

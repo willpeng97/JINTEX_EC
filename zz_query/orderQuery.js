@@ -147,6 +147,13 @@ function displayOrders_A(orderGrid_A){
     //第一個Table(EC訂單送出)
     tableA1 = new DataTable("#tableA1", {
         stateSave: true,
+        stateSaveParams: function (settings, data) {
+            // 只保存排序和分頁，不保存搜尋
+            data.search = {};
+            data.columns.forEach(column => {
+                column.search = {};
+            });
+        },
         paging: true,
         scrollCollapse: true,
         autoWidth: false,
@@ -225,6 +232,13 @@ function displayOrders_A(orderGrid_A){
     //第二個Table(EC審核中)
     tableA2 = new DataTable("#tableA2", {
         stateSave: true,
+        stateSaveParams: function (settings, data) {
+            // 只保存排序和分頁，不保存搜尋
+            data.search = {};
+            data.columns.forEach(column => {
+                column.search = {};
+            });
+        },
         paging: true,
         scrollCollapse: true,
         autoWidth: false,
@@ -314,7 +328,7 @@ function displayOrders_B(orderGrid_B){
                 <td>${order.XMDA033}</td>
                 <td>${order.XMDA008}</td>
                 <td>${order.XMDADOCDT}</td>
-                <td>${order.XMDA007}</td>
+                <td>${order.XMDA007.replace("A0","電商")}</td>
                 <td>
                     <button class="btn btn-success" onclick="viewDetail_ERP('${order.XMDA008}','${order.XMDADOCNO}')">
                         <img src="../img/comm/FontAwesome/document.svg" alt="edit">
@@ -328,6 +342,13 @@ function displayOrders_B(orderGrid_B){
     //第二個Table(ERP)
     tableB = new DataTable("#tableB", {
         stateSave: true,
+        stateSaveParams: function (settings, data) {
+            // 只保存排序和分頁，不保存搜尋
+            data.search = {};
+            data.columns.forEach(column => {
+                column.search = {};
+            });
+        },
         paging: true,
         scrollCollapse: true,
         pageLength: 10, // 預設每頁顯示10筆資料
