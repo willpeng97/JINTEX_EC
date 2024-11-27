@@ -28,6 +28,7 @@ function displayAccounts(accountGrid){
         <td>${account.ORDER_LEV}</td>
         <td>${account.OOFB017}</td>
         <td>${account.PMAJUA002}</td>
+        <td>${account.PMABL081}</td>
         <td>${account.PMABUAL005}</td>
         <td>
           <img src="../img/weyu/icons-change.png" class="reset-password-Img" onclick="misResetPassword('${account.USER_SID}')">
