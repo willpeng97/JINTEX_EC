@@ -21,12 +21,13 @@ function setFunctionList(masterSID){
     });
 
     let functionListHtml = ''
+    let otherFunctionListHtml = ''
     allBindData.forEach((fun,index) => {
         let FUN_SID = fun.FUN_SID
         let GROUP_FUN_LIST_SID = fun.GROUP_FUN_LIST_SID || ""
         let isBind = fun.GROUP_FUN_LIST_SID ? true : false;
-
-        functionListHtml += `
+        
+        let item = `
             <div class="col-6 mb-2">
                 <div class="form-check">
                     <input
@@ -43,9 +44,18 @@ function setFunctionList(masterSID){
                 </div>
             </div>
         `
+        
+        switch(FUN_SID){
+            case "365349533000391": //是否為業務群組
+                otherFunctionListHtml += item
+                break;
+            default:
+                functionListHtml += item
+        }
     });
 
     $("#functionList").html(functionListHtml)
+    $("#otherFunctionList").html(otherFunctionListHtml)
 
     
     function getAllBindData(master_sid) {

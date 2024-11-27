@@ -324,6 +324,7 @@ function Set_Clean(){
   localStorage.removeItem('cartProducts');
   localStorage.removeItem('subsidiary_code');
   localStorage.removeItem('subsidiary_name');
+  localStorage.removeItem('isSalesman');
 
   // 失敗後導回 登入頁
   window.location.href = window.location.protocol+'//'+location.hostname + (location.port ? ':' + location.port : '')+'/'+PROJECT_NAME+'/login.html';

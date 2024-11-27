@@ -259,6 +259,11 @@ async function GetMEMSMenu(ACCOUNT_NO) {
           let data = await response.json();
           let keys = data.data.map((e) => e.FUN_SID)
 
+          // 判斷是否為業務群組
+          if(keys.includes("365349533000391")){
+            localStorage.setItem('isSalesman', "Y");
+          }
+
           // 返回 可使用的功能權限
           return keys
       } else {
