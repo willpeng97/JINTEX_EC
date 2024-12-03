@@ -78,6 +78,7 @@ function displayOrders(orderGrid){
                 <td>${order.PMAAL004_A}</td>
                 <td>${order.USER_NAME}</td>
                 <td>${order.ADDRESS}</td>
+                <td>${order.PMAJUA002}</td>
                 <td>${order.PURCHASE_ORDER||''}</td>
                 <td>${order.ORDER_DATE.replace('T',' ')}</td>
                 <td>${statusHtml}</td>
@@ -110,7 +111,7 @@ function displayOrders(orderGrid){
         order: [[ 6, "desc" ]],
         columnDefs: [{
             orderable:false,
-            target:[8,9]
+            target:[9,10]
         }],
         initComplete: function() {
             $(".dataTables_filter").hide() // 隱藏dataTable原生搜尋欄
