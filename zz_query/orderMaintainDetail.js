@@ -25,6 +25,7 @@ async function fetchData() {
       INVAIL_FLAG: detail.INVAIL_FLAG,
       deliveryDate: detail.DELIVERY_DATE.split('T')[0],
       SUTS: detail.SUTS,
+      comment: detail.COMMENT||"無",
     };
   });
   displayCartProducts();
@@ -67,6 +68,7 @@ function displayCartProducts() {
       </tr>
     `;
     $('#cartProducts').append(productHtml);
+    $("#commentText").text(cartProduct.comment)
   });
 
 
