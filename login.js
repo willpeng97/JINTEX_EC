@@ -1,6 +1,6 @@
 
 $(document).ready(function () {
-  getServerCSRFToken();
+  togglePasswordVisible()
 });
 
 const login = document.querySelector('#login');
@@ -300,4 +300,18 @@ async function forgetPwd(){
       }
   });
 
+}
+
+function togglePasswordVisible() {
+  $('#togglePassword').on('click', function () {
+    const $passwordInput = $('#pw');
+    const $eyeIcon = $('#eyeIcon');
+
+    // 切换密码输入框的类型
+    const type = $passwordInput.attr('type') === 'password' ? 'text' : 'password';
+    $passwordInput.attr('type', type);
+
+    // 切换图标
+    $eyeIcon.toggleClass('fa-eye-slash fa-eye');
+  });
 }
