@@ -92,7 +92,16 @@
       </div>
       <div class="row py-3">
         <div class="col text-center">
-          <p>總重量: <span id="totalItems">0</span> kg</p>
+          <p class="text-end me-3">總重量: <span id="totalItems">0</span> kg</p>
+          <div class="card">
+            <div class="card-header bg-secondary text-white text-center fw-bold">
+              備註訊息
+            </div>
+            <div class="card-body overflow-auto" id="commentText" style="max-height: 150px;">
+              這是一個訂單的備註內容，可以用來顯示長文本。如果備註超出顯示框，將以滾動的方式呈現。<br />
+              範例：用戶希望訂單於明天早上送達，並請附上發票。
+            </div>
+          </div>
           <!-- <p>總金額: $<span id="totalPrice">0</span></p> -->
           <!-- <a href="orderQuery.html"><button id="" class="btn btn-secondary m-2 fw-bold">返回</button></a> -->
           <button id="cancelBtn" class="btn btn-outline-danger m-2 fw-bold" style="display: none" data-bs-toggle="modal" data-bs-target="#deleteOrderConfirmationModal">取消訂單</button>

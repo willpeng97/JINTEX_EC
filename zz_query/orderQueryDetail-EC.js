@@ -28,6 +28,7 @@ async function fetchData() {
       INVAIL_FLAG: detail.INVAIL_FLAG,
       EXPORT_LOCK_FLAG: detail.EXPORT_LOCK_FLAG,
       deliveryDate: detail.DELIVERY_DATE.split('T')[0],
+      comment: detail.COMMENT||"無",
     };
   });
   displayCartProducts();
@@ -58,6 +59,8 @@ function displayCartProducts() {
         </tr>
       `;
       $('#cartProducts').append(productHtml);
+
+      $("#commentText").text(cartProduct.comment)
     }else if(cartProduct.INVAIL_FLAG === 'N'){
       var productHtml = `
         <tr>
@@ -79,6 +82,7 @@ function displayCartProducts() {
         </tr>
       `;
       $('#cartProducts').append(productHtml);
+      $("#commentText").text(cartProduct.comment)
       
     }
   });

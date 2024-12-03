@@ -110,6 +110,7 @@ function displayOrders_A(orderGrid_A){
                     <td>${order.PMAAL004_A}</td>
                     <td>${order.USER_NAME}</td>
                     <td>${order.ADDRESS}</td>
+                    <td>${order.PMAJUA002}</td>
                     <td>${order.PURCHASE_ORDER||''}</td>
                     <td>${order.ORDER_DATE.split('T')[0]}</td>
                     <td>
@@ -130,6 +131,7 @@ function displayOrders_A(orderGrid_A){
                     <td>${order.PMAAL004_A}</td>
                     <td>${order.USER_NAME}</td>
                     <td>${order.ADDRESS}</td>
+                    <td>${order.PMAJUA002}</td>
                     <td>${order.PURCHASE_ORDER||''}</td>
                     <td>${order.ORDER_DATE.split('T')[0]}</td>
                     <td>
@@ -158,20 +160,23 @@ function displayOrders_A(orderGrid_A){
         scrollCollapse: true,
         autoWidth: false,
         columns: [
-            { width: "10%" }, // 第一列寬度
             { width: "15%" },
-            { width: "15%" },
+            { width: "10%" },
+            { width: "10%" },
             { width: "25%" },
+            { width: "10%" },
             { width: "15%" },
-            { width: "15%" },
+            { width: "10%" },
             { width: "5%" }
         ],
         pageLength: 10, // 預設每頁顯示10筆資料
         order: [[5, "desc" ]],
-        columnDefs: [{
-            orderable:false,
-            target:[6]
-        }],
+        columnDefs: [
+            {
+                orderable:false,
+                target:[7]
+            }
+        ],
         initComplete: function() {
             $("#tableA1_filter").hide() // 隱藏dataTable原生搜尋欄
             // 關鍵字搜尋
@@ -243,20 +248,23 @@ function displayOrders_A(orderGrid_A){
         scrollCollapse: true,
         autoWidth: false,
         columns: [
-            { width: "10%" }, // 第一列寬度
             { width: "15%" },
-            { width: "15%" },
+            { width: "10%" },
+            { width: "10%" },
             { width: "25%" },
+            { width: "10%" },
             { width: "15%" },
-            { width: "15%" },
+            { width: "10%" },
             { width: "5%" }
         ],
         pageLength: 10, // 預設每頁顯示10筆資料
         order: [[5, "desc" ]],
-        columnDefs: [{
-            orderable:false,
-            target:[6]
-        }],
+        columnDefs: [
+            {
+                orderable:false,
+                target:[7]
+            }
+        ],
         initComplete: function() {
             $("#tableA2_filter").hide() // 隱藏dataTable原生搜尋欄
             // 關鍵字搜尋

@@ -9,12 +9,13 @@ $(document).ready(async function() {
   userData = await getGridDataV2(userDataSID)
   userData.forEach((e)=>{
     if(e.ORIGINAL_ACCOUNT_NO === localStorage.getItem(PROJECT_SAVE_NAME+'_BI_ORIGINAL_ACCOUNT_NO')){
-      $("#customer").val(e.PMAAL004_A);
-      // $("#address").html(initAddressOption(e.OOFB017));
+      $("#USER_SID").val(e.USER_SID)
+    }else if(e.PMAA001 === localStorage.getItem("subsidiary_code")){
+      $("#USER_SID_SUB").val(e.USER_SID)
       $("#address").val(e.OOFB017);
+      $("#customer").val(e.PMAAL004_A);
       $("#receiver").val(e.PMAJUA002)
       $("#PMABSITE").val(e.PMABSITE)
-      $("#USER_SID").val(e.USER_SID)
     }
   })
   $("#purchaser").val(localStorage.getItem(PROJECT_SAVE_NAME+'_BI_userName'));
@@ -150,7 +151,7 @@ $(document).ready(async function() {
 
 function updateReceiver(){
   let username = localStorage.getItem(PROJECT_SAVE_NAME+'_BI_ORIGINAL_ACCOUNT_NO')
-  let SIDArray = `USER_SID=${$("#USER_SID").val()}`
+  let SIDArray = `USER_SID=${$("#USER_SID_SUB").val()}`
   let EditVal = `PMAJUA002=N'${$("#receiver").val()}',`
   $.ajax({
     type: 'post',
