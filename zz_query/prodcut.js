@@ -9,6 +9,7 @@ var currentFilteredProducts = [];
 var itemsPerPage = 12;
 
 var products = [];
+var cartProducts = []
 var formattedArray;
 
 var subsidiary_code = localStorage.getItem('subsidiary_code') // 所選子公司
@@ -130,7 +131,7 @@ function loadProductsAndProceed() {
 
   // 從本地存儲中檢索購物車數據
   var cartProductsJSON = localStorage.getItem('cartProducts');
-  var cartProducts = cartProductsJSON ? JSON.parse(cartProductsJSON) : [];
+  cartProducts = cartProductsJSON ? JSON.parse(cartProductsJSON) : [];
 
   // 根據需要使用 cartProducts
   updateCartItemCount(cartProducts);// 更新購物車商品數量
