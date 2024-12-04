@@ -151,15 +151,32 @@ $(document).ready(async function() {
 
 function updateReceiver(){
   let username = localStorage.getItem(PROJECT_SAVE_NAME+'_BI_ORIGINAL_ACCOUNT_NO')
-  let SIDArray = `USER_SID=${$("#USER_SID_SUB").val()}`
-  let EditVal = `PMAJUA002=N'${$("#receiver").val()}',`
+  let receiver = $("#receiver").val()
+  let company = localStorage.getItem("subsidiary_code")
+
+  //添加單頭
+  requestBody = {
+    "PMAA001": company, //分公司
+    "PMAJUA002": receiver,//收貨人,USER隨便敲
+    "LOGIN_USER": username
+  }
   $.ajax({
-    type: 'post',
-    url: window.location.protocol+'//' + default_ip + '/' + default_WebSiteName + '/MasterMaintain/Model/MasterMaintainHandler.ashx',
-    data: { funcName: "UpdGridData", TableName: "SEC_USER", SID: SIDArray, EditVal: EditVal, USER: username,SID_VAL:304100717100290,log_val : EditVal },
-    dataType: 'json',
-    async: false,
+      url: window.location.protocol+'//'+default_ip+'/'+default_Api_Name+ "/api/CHANGE_RCP", // 替換為你的API端點
+      type: 'POST',
+      data: JSON.stringify(requestBody), // 将body对象转换为JSON字符串
+      dataType: 'json',
+      contentType: 'application/json',
+      headers: {
+          'TokenKey':localStorage.getItem(PROJECT_SAVE_NAME+'_BI_TokenKey'), // 替換為你的自訂Header
+      },
+      success: function(response) {
+        // alert("收貨人修改成功")
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        // alert("收貨人修改失敗")
+      }
   });
+
 }
 // function initAddressOption(addressStr){
 //   let options = addressStr.split(',').map((opt) => {
