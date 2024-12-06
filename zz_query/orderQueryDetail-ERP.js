@@ -99,27 +99,30 @@ function getGridDataOrderDetail(SID,XMDADOCNO) {
 }
 
 function cancelErpBody(ZZ_BTB_ORDER_V_SID){
-  let body = {
-    "ZZ_BTB_ORDER_V_SID": ZZ_BTB_ORDER_V_SID,
-    "LOGIN_USER": localStorage.getItem(PROJECT_SAVE_NAME+'_BI_ORIGINAL_ACCOUNT_NO')
-  };
-
-  $.ajax({
-      url: window.location.protocol+'//'+default_ip+'/'+default_Api_Name+'/api/DELETE_ERP',
-      type: 'DELETE',
-      data: JSON.stringify(body), // 将body对象转换为JSON字符串
-      dataType: 'json',
-      contentType: 'application/json',
-      headers: {
-        'TokenKey': localStorage.getItem(PROJECT_SAVE_NAME+'_BI_TokenKey'), // 替換為你的自訂Header
-      },
-      success: function(response) {
-        $('#deleteOrderConfirmationModal').modal('hide')
-        alert('取消申請已送出!')
-        location.reload()
-      },
-      error: function(jqXHR, textStatus, errorThrown) {
-        console.error('Error:', textStatus, errorThrown);
-      }
-  });
+  let yes = confirm("確定要申請取消嗎?")
+  if(yes){
+    let body = {
+      "ZZ_BTB_ORDER_V_SID": ZZ_BTB_ORDER_V_SID,
+      "LOGIN_USER": localStorage.getItem(PROJECT_SAVE_NAME+'_BI_ORIGINAL_ACCOUNT_NO')
+    };
+  
+    $.ajax({
+        url: window.location.protocol+'//'+default_ip+'/'+default_Api_Name+'/api/DELETE_ERP',
+        type: 'DELETE',
+        data: JSON.stringify(body), // 将body对象转换为JSON字符串
+        dataType: 'json',
+        contentType: 'application/json',
+        headers: {
+          'TokenKey': localStorage.getItem(PROJECT_SAVE_NAME+'_BI_TokenKey'), // 替換為你的自訂Header
+        },
+        success: function(response) {
+          // alert('取消申請已送出!')
+          location.reload()
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+          console.error('Error:', textStatus, errorThrown);
+          location.reload()
+        }
+    });
+  }
 }
