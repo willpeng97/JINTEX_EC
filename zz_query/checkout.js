@@ -10,7 +10,8 @@ $(document).ready(async function() {
   userData.forEach((e)=>{
     if(e.ORIGINAL_ACCOUNT_NO === localStorage.getItem(PROJECT_SAVE_NAME+'_BI_ORIGINAL_ACCOUNT_NO')){
       $("#USER_SID").val(e.USER_SID)
-    }else if(e.PMAA001 === localStorage.getItem("subsidiary_code")){
+    }
+    if(e.PMAA001 === localStorage.getItem("subsidiary_code")){
       $("#USER_SID_SUB").val(e.USER_SID)
       $("#address").val(e.OOFB017);
       $("#customer").val(e.PMAAL004_A);
