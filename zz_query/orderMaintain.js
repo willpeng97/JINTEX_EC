@@ -130,7 +130,7 @@ function displayOrders(orderGrid){
                 function(settings, data, dataIndex) {
                     var min = $('#search-from').val() ? $('#search-from').val() + " 00:00:00" : ""
                     var max = $('#search-to').val() ? $('#search-to').val() + " 23:59:59" : ""
-                    var date = data[6]; // 下單時間在第 7 欄
+                    var date = data[7]; // 下單時間在第 8 欄
         
                     if (
                         (min === "" && max === "") ||

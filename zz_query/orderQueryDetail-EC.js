@@ -132,6 +132,7 @@ function deleteDetail() {
     // 保存修改
     existingProduct.INVAIL_FLAG = 'Y';
     EditOrder()
+
     // Display updated cart products
     displayCartProducts();
   }
@@ -272,7 +273,11 @@ function EditOrder() {
         'TokenKey': localStorage.getItem(PROJECT_SAVE_NAME+'_BI_TokenKey'), // 替換為你的自訂Header
       },
       success: function(response) {
-        alert('訂單已完成修改!')
+        if(orderDetails.every(e => e.INVAIL_FLAG === 'Y')){
+          DeleteOrder()
+        } else {
+          alert('訂單已完成修改!')
+        }
         // location.reload()
       },
       error: function(jqXHR, textStatus, errorThrown) {
