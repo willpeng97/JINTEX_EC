@@ -254,8 +254,8 @@ function displayProducts(pageNumber, productsToDisplay) {
 
     var productHtml = `
       <tr>
-      <td>${product.name_en}</td>
       <td>${product.name}</td>
+      <td>${product.name_en}</td>
       <td>${product.unit}kg</td>
       <td>
         <label for="quantity-${product.sid}">
